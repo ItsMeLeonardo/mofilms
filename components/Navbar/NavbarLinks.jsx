@@ -1,25 +1,29 @@
-import LinkNext from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { Grid } from "@nextui-org/react";
 
-import { Grid, Link } from "@nextui-org/react";
+import NavbarLinkItem from "./NavbarLinkItem";
+
+const routes = ["/movies", "/tv", "/actors"];
 
 export default function Navbar() {
+  const router = useRouter();
+  const [currentPath, setCurrentPath] = useState("/");
+
+  useEffect(() => {
+    const path = router.asPath;
+    setCurrentPath(path);
+  }, [router.asPath]);
+
   return (
     <Grid.Container gap={2} justify="flex-start" alignItems="center">
-      <Grid>
-        <LinkNext href="/movies">
-          <Link>Movies</Link>
-        </LinkNext>
-      </Grid>
-      <Grid>
-        <LinkNext href="/tv">
-          <Link>TV shows</Link>
-        </LinkNext>
-      </Grid>
-      <Grid>
-        <LinkNext href="/actors">
-          <Link>Actors</Link>
-        </LinkNext>
-      </Grid>
+      {routes.map((route) => (
+        <NavbarLinkItem
+          key={route}
+          route={route}
+          isInThisPage={route === currentPath}
+        />
+      ))}
     </Grid.Container>
   );
 }
