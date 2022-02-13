@@ -1,6 +1,5 @@
-import MovieCard from "../MovieCard";
 import HorizontalList from "../HorizontalList";
-
+import MovieCard from "../MovieCard";
 const data = [
   {
     title: "The Shawshank Redemption",
@@ -54,16 +53,15 @@ const data = [
   },
 ];
 
-export default function Discovers() {
+export default function MostPopular() {
   return (
     <>
-      <h1>Discovers</h1>
+      <h1>Trending</h1>
       <HorizontalList>
         {data.map((movie) => (
-          <MovieCard {...movie} key={movie.title} />
+          <MovieCard {...movie} key={`${movie.title} + ${Math.random * 100}`} />
         ))}
       </HorizontalList>
-      <style jsx>{``}</style>
     </>
   );
 }
