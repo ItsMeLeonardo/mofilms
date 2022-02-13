@@ -16,7 +16,7 @@ export default function NavbarSetting() {
       alignItems="center"
     >
       <Grid alignItems="center" justify="center">
-        <SearchInput />
+        <SearchInput label="What do we see today?" />
       </Grid>
       {/* NOTIFICATION */}
       <Grid xs={0} sm={2} alignItems="center" justify="center">

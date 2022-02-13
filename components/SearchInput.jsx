@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button, Input, Spacer, Loading } from "@nextui-org/react";
 import { Search } from "react-iconly";
 
-export default function SearchInput() {
+export default function SearchInput({ label = "Write a word" } = {}) {
   const [inputShowed, setInputShowed] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -34,12 +34,15 @@ export default function SearchInput() {
     <>
       <form onSubmit={handleSubmit}>
         <Input
-          placeholder="What watch today?"
+          placeholder={label}
           type="search"
           hidden={!inputShowed}
+          readOnly={loading}
+          bordered={inputShowed}
+          color="error"
+          helperText={inputShowed && "min 3 characters"}
           name="keyword"
           id="SearchInput"
-          readOnly={loading}
           arial-label="Search"
           css={{ background: "#333333" }}
         />
