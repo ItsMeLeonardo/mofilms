@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
 import { Star } from "react-iconly";
 
@@ -6,7 +7,7 @@ const defaultPoster =
 
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
-export default function MovieCard({
+function MovieCard({
   title = "",
   rate = 0,
   badge = null,
@@ -99,3 +100,7 @@ export default function MovieCard({
     </>
   );
 }
+
+export default memo(MovieCard, (prevProps, nextProps) => {
+  return prevProps.title === nextProps.title;
+});
