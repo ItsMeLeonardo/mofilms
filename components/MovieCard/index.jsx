@@ -1,8 +1,6 @@
 import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
 import { Star } from "react-iconly";
 
-import { addZeroToNumber } from "../../utils/formatString";
-
 const defaultPoster =
   "https://64.media.tumblr.com/a36311872444e745d703353dd12f9c85/1d81862d4bac390e-69/s1280x1920/2c160bfc7a32ca6aeb0f17c36bb224031c46f8d9.jpg";
 
@@ -11,15 +9,17 @@ const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 export default function MovieCard({
   title = "",
   rate = 0,
-  rank = "01",
+  badge = null,
   poster = defaultPoster,
   date = "",
   backdropImg = "",
+  size = 3,
+  h = 400,
 } = {}) {
-  const isTheFirst = rank === 1;
+  const isRectangle = size > 4;
   return (
     <>
-      <Grid xs={12} sm={isTheFirst ? 6 : 3}>
+      <Grid xs={12} sm={size}>
         <Card hoverable clickable cover css={{ w: "100%" }}>
           <Card.Header
             css={{
@@ -30,25 +30,13 @@ export default function MovieCard({
             }}
           >
             <Row align="center" justify="flex-end">
-              <Text
-                color="white"
-                weight="bold"
-                css={{
-                  p: ".5rem",
-                  bgBlur: "#e1e1e1",
-                  lineHeight: "$sm",
-                  borderRadius: "0 .75rem 0 .75rem",
-                  border: "1px solid rgba(255,255,255,.5)",
-                }}
-              >
-                {addZeroToNumber(rank, 2)}
-              </Text>
+              {badge && <span className="badge">{badge}</span>}
             </Row>
           </Card.Header>
           <Card.Body>
             <Card.Image
-              src={(isTheFirst && backdropImg) || poster}
-              height={400}
+              src={(isRectangle && backdropImg) || poster}
+              height={h}
               width="100%"
               alt="Relaxing app background"
             />
@@ -72,7 +60,7 @@ export default function MovieCard({
                   size="1rem"
                   css={{
                     whiteSpace: "nowrap",
-                    maxWidth: isTheFirst ? "100%" : "18ch",
+                    maxWidth: isRectangle ? "100%" : "18ch",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                   }}
@@ -95,7 +83,18 @@ export default function MovieCard({
           </Card.Footer>
         </Card>
       </Grid>
-      <style jsx>{``}</style>
+      <style jsx>{`
+        .badge {
+          display: flex;
+          align-items: center;
+          padding: 0.5rem;
+          border-radius: 0.25rem 0.75rem 0.25rem 0.75rem;
+          border: 1px solid rgba(255, 255, 255, 0.5);
+          background: #e1e1e166;
+          backdrop-filter: saturate(180%) blur(10px);
+          gap: 0.25rem;
+        }
+      `}</style>
     </>
   );
 }

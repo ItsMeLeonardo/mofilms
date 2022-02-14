@@ -1,5 +1,9 @@
+import { Text } from "@nextui-org/react";
+
 import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
+import { addZeroToNumber } from "../../utils/formatString";
+
 const data = [
   {
     title: "The Shawshank Redemption",
@@ -63,6 +67,16 @@ export default function MostPopular() {
             {...movie}
             rank={index + 1}
             key={`${movie.title} + ${Math.random}`}
+            size={index === 0 ? 6 : 3}
+            badge={
+              <Text
+                size="1.25rem"
+                weight="bold"
+                css={{ lineHeight: "1.25rem" }}
+              >
+                {addZeroToNumber(index + 1, 2)}
+              </Text>
+            }
           />
         ))}
       </HorizontalList>

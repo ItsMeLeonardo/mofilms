@@ -1,3 +1,6 @@
+import { Text } from "@nextui-org/react";
+import { User } from "react-iconly";
+
 import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
 const data = [
@@ -53,13 +56,27 @@ const data = [
   },
 ];
 
+const Badge = () => (
+  <>
+    <User stroke="bold" size="small" />
+    <Text size={12} weight="bold">
+      1000
+    </Text>
+  </>
+);
+
 export default function MostPopular() {
   return (
     <>
       <h1>Trending</h1>
       <HorizontalList>
-        {data.map((movie) => (
-          <MovieCard {...movie} key={`${movie.title} + ${Math.random * 100}`} />
+        {data.map((movie, index) => (
+          <MovieCard
+            {...movie}
+            rank={index + 1}
+            key={`${movie.title} + ${Math.random}`}
+            badge={<Badge />}
+          />
         ))}
       </HorizontalList>
     </>
