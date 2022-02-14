@@ -22,18 +22,20 @@ function MovieCard({
     <>
       <Grid xs={12} sm={cols}>
         <Card hoverable clickable cover css={{ w: "100%" }}>
-          <Card.Header
-            css={{
-              position: "absolute",
-              zIndex: 1,
-              top: 0,
-              background: overlayGradient,
-            }}
-          >
-            <Row align="center" justify="flex-end">
-              {badge && <span className="badge">{badge}</span>}
-            </Row>
-          </Card.Header>
+          {badge && (
+            <Card.Header
+              css={{
+                position: "absolute",
+                zIndex: 1,
+                top: 0,
+                background: overlayGradient,
+              }}
+            >
+              <Row align="center" justify="flex-end">
+                <span className="badge">{badge}</span>
+              </Row>
+            </Card.Header>
+          )}
           <Card.Body>
             <Card.Image
               src={(isRectangle && backdropImg) || poster}
