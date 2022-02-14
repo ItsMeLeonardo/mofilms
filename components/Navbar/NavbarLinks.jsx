@@ -4,7 +4,12 @@ import { Grid } from "@nextui-org/react";
 
 import NavbarLinkItem from "./NavbarLinkItem";
 
-const routes = ["/movies", "/tv", "/actors"];
+const routes = [
+  { route: "/movies/action", label: "Movies" },
+  { route: "/tv", label: "Tv" },
+  { route: "/actors", label: "Actors" },
+  { route: "/advancedSearch", label: "Advanced Search" },
+];
 
 export default function Navbar() {
   const router = useRouter();
@@ -17,13 +22,17 @@ export default function Navbar() {
 
   return (
     <Grid.Container gap={2} justify="flex-start" alignItems="center">
-      {routes.map((route) => (
-        <NavbarLinkItem
-          key={route}
-          route={route}
-          isInThisPage={route === currentPath}
-        />
-      ))}
+      {routes.map(({ label, route }) => {
+        const isInThisPage = route.split("/")[1] === currentPath.split("/")[1];
+        return (
+          <NavbarLinkItem
+            key={route}
+            route={route}
+            label={label}
+            isInThisPage={isInThisPage}
+          />
+        );
+      })}
     </Grid.Container>
   );
 }
