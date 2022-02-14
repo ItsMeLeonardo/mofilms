@@ -10,6 +10,7 @@ const darkTheme = createTheme({
   theme: {
     colors: {
       accents1: "#333333",
+      black: '#333  '
     },
   },
 });
