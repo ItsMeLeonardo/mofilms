@@ -67,7 +67,7 @@ export default function MostPopular() {
             {...movie}
             rank={index + 1}
             key={`${movie.title} + ${Math.random}`}
-            size={index === 0 ? 6 : 3}
+            cols={index === 0 ? 6 : 3}
             badge={
               <Text
                 size="1.25rem"

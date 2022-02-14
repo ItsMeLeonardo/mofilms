@@ -13,13 +13,13 @@ export default function MovieCard({
   poster = defaultPoster,
   date = "",
   backdropImg = "",
-  size = 3,
+  cols = 3,
   h = 400,
 } = {}) {
-  const isRectangle = size > 4;
+  const isRectangle = cols > 4;
   return (
     <>
-      <Grid xs={12} sm={size}>
+      <Grid xs={12} sm={cols}>
         <Card hoverable clickable cover css={{ w: "100%" }}>
           <Card.Header
             css={{
@@ -60,7 +60,7 @@ export default function MovieCard({
                   size="1rem"
                   css={{
                     whiteSpace: "nowrap",
-                    maxWidth: isRectangle ? "100%" : "18ch",
+                    maxWidth: isRectangle ? "100%" : "16ch",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                   }}
@@ -83,6 +83,7 @@ export default function MovieCard({
           </Card.Footer>
         </Card>
       </Grid>
+
       <style jsx>{`
         .badge {
           display: flex;
