@@ -5,8 +5,6 @@ import NavbarSetting from "./NavbarSetting";
 import NavbarLinks from "./NavbarLinks";
 import Logo from "../Logo";
 
-const textGradient = "112deg, #AAFFEC -63.59%, #ff4ecd -20.3%, #0070F3 70.46%";
-
 export default function Navbar() {
   return (
     <>
@@ -15,7 +13,7 @@ export default function Navbar() {
           <LinkNext href="/">
             <a>
               <Logo />
-              <Text size={16} weight="bold" css={{ textGradient }}>
+              <Text size={16} weight="bold" css={{ textGradient: "$gradBlue" }}>
                 MoFilms
               </Text>
             </a>

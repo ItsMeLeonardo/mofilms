@@ -2,8 +2,6 @@ import react from "react";
 import LinkNext from "next/link";
 import { Grid, Link, Text } from "@nextui-org/react";
 
-const textGradient = "45deg, $red800 -20%, $purple400 50%";
-
 function NavbarLinkItem({ route, isInThisPage, label }) {
   return (
     <Grid css={{ mr: "1.5rem" }}>
@@ -13,7 +11,7 @@ function NavbarLinkItem({ route, isInThisPage, label }) {
             size="1rem"
             weight="medium"
             color="$accents4"
-            css={isInThisPage && { textGradient }}
+            css={isInThisPage && { textGradient: "$gradPurple" }}
           >
             {label}
           </Text>
