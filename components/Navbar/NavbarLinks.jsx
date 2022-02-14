@@ -5,7 +5,7 @@ import { Grid } from "@nextui-org/react";
 import NavbarLinkItem from "./NavbarLinkItem";
 
 const routes = [
-  { route: "/movies/action", label: "Movies" },
+  { route: "/movies/28", label: "Movies" },
   { route: "/tv", label: "Tv" },
   { route: "/actors", label: "Actors" },
   { route: "/advancedSearch", label: "Advanced Search" },
