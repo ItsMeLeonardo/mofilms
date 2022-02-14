@@ -1,5 +1,5 @@
 import { Text } from "@nextui-org/react";
-import { User } from "react-iconly";
+import { TwoUsers } from "react-iconly";
 
 import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
@@ -58,7 +58,7 @@ const data = [
 
 const Badge = () => (
   <>
-    <User stroke="bold" size="small" />
+    <TwoUsers stroke="bold" size="small" />
     <Text size={12} weight="bold">
       1000
     </Text>
