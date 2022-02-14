@@ -6,7 +6,7 @@ import NavbarLinkItem from "./NavbarLinkItem";
 
 const routes = [
   { route: "/movies/28", label: "Movies" },
-  { route: "/tv", label: "Tv" },
+  { route: "/tv/16", label: "Tv" },
   { route: "/actors", label: "Actors" },
   { route: "/advancedSearch", label: "Advanced Search" },
 ];
