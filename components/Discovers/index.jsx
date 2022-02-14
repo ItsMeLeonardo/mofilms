@@ -1,7 +1,4 @@
-import { Grid } from "@nextui-org/react";
-
-import MovieCard from "../MovieCard";
-
+import MovieList from "../MovieList";
 const data = [
   {
     title: "The Shawshank Redemption",
@@ -59,11 +56,7 @@ export default function Discovers() {
   return (
     <>
       <h1>Discovers</h1>
-      <Grid.Container gap={2}>
-        {data.map((movie) => (
-          <MovieCard {...movie} key={movie.title} h={350} />
-        ))}
-      </Grid.Container>
+      <MovieList movies={data} />
       <style jsx>{``}</style>
     </>
   );
