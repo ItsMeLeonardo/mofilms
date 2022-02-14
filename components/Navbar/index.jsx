@@ -8,7 +8,18 @@ import Logo from "../Logo";
 export default function Navbar() {
   return (
     <>
-      <Grid.Container justify="space-between" alignItems="center" wrap="nowrap">
+      <Grid.Container
+        justify="space-between"
+        alignItems="center"
+        wrap="nowrap"
+        css={{
+          position: "sticky",
+          top: "0",
+          zIndex: "20",
+          bg: "rgba(17, 17, 17, 0.85)",
+          bgBlur: "0.5rem",
+        }}
+      >
         <Grid xs={1} sm={1} css={{ mr: "5rem" }}>
           <LinkNext href="/">
             <a>
