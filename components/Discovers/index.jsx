@@ -1,5 +1,6 @@
+import { Grid } from "@nextui-org/react";
+
 import MovieCard from "../MovieCard";
-import HorizontalList from "../HorizontalList";
 
 const data = [
   {
@@ -53,16 +54,16 @@ const data = [
     date: "2008-07-18",
   },
 ];
-
+// when do hover, show a card with the video movie, use =>  position: fixed; top: 0; right: 0;
 export default function Discovers() {
   return (
     <>
       <h1>Discovers</h1>
-      <HorizontalList>
+      <Grid.Container gap={2}>
         {data.map((movie) => (
-          <MovieCard {...movie} key={movie.title} />
+          <MovieCard {...movie} key={movie.title} h={350} />
         ))}
-      </HorizontalList>
+      </Grid.Container>
       <style jsx>{``}</style>
     </>
   );
