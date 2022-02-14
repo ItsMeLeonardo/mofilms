@@ -1,9 +1,14 @@
+:root {
+  --scroll-size: 0.5rem;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: #111111;
 }
 
 a {
@@ -13,4 +18,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: var(--scroll-size);
+  height: var(--scroll-size);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: var(--scroll-size);
+  background: #333333;
 }
