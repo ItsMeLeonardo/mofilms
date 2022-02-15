@@ -1,11 +1,14 @@
 import { Grid } from "@nextui-org/react";
-
-export default function HorizontalList({ children }) {
+export default function HorizontalList({ children, gap = 2 } = {}) {
   return (
     <>
       <div className="container">
         <section className="scroll-content">
-          <Grid.Container gap={2} wrap="nowrap" css={{ width: "max-content" }}>
+          <Grid.Container
+            gap={gap}
+            wrap="nowrap"
+            css={{ width: "max-content" }}
+          >
             {children}
           </Grid.Container>
         </section>
