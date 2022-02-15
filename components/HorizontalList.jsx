@@ -26,10 +26,15 @@ export default function HorizontalList({ children, gap = 2 } = {}) {
           position: absolute;
           top: 0;
           right: 0;
-          z-index: 10;
-          width: 5rem;
+          z-index: 100;
+          width: 2.5rem;
           height: 100%;
           background: linear-gradient(90deg, transparent, #111);
+        }
+        @media (min-width: 600px) {
+          .container::after {
+            width: 5rem;
+          }
         }
       `}</style>
     </>

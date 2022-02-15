@@ -151,11 +151,10 @@ export default function Movies() {
       {/* add 5 movie same netflix header */}
       <GenderList genders={genders} currentGender={gender} />
       <Spacer x={2} />
-      <Row as="h2" gap={1}>
+      <Row as="h2" gap={1} css={{ "@smMax": { fontSize: "1.75rem" } }}>
         Movies Results of
         <Text
           size="$fontSizesLg"
-          h3
           weight="bold"
           css={{ textGradient: "$gradPurple" }}
         >

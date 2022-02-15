@@ -28,3 +28,20 @@ a {
   border-radius: var(--scroll-size);
   background: #333333;
 }
+
+@media (max-width: 960px) {
+  .movieList-item {
+    margin: 0 auto;
+    max-width: 33% !important;
+  }
+}
+@media (max-width: 768px) {
+  .movieList-item {
+    max-width: 50% !important;
+  }
+}
+@media (max-width: 450px) {
+  .movieList-item {
+    max-width: 320px !important;
+  }
+}

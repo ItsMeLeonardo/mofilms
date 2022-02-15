@@ -16,11 +16,12 @@ function MovieCard({
   backdropImg = "",
   cols = 3,
   h = 400,
+  className = "",
 } = {}) {
   const isRectangle = cols > 4;
   return (
     <>
-      <Grid xs={12} sm={cols}>
+      <Grid xs={12} sm={3} md={cols} className={className}>
         <Card hoverable clickable cover css={{ w: "100%" }}>
           {badge && (
             <Card.Header

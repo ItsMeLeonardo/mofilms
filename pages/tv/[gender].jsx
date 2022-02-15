@@ -138,10 +138,9 @@ export default function Tv() {
       {/* add 5 movie same netflix header */}
       <GenderList genders={genders} currentGender={gender} />
       <Spacer x={2} />
-      <Row as="h2" gap={1}>
+      <Row as="h2" gap={1} css={{ "@smMax": { fontSize: "1.75rem" } }}>
         Results to
         <Text
-          h3
           size="$fontSizesLg"
           weight="bold"
           css={{ textGradient: "$gradPurple" }}

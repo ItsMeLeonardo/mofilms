@@ -31,7 +31,7 @@ export default function Actors() {
         <Grid.Container
           gap={4}
           align="center"
-          justify="flex-start"
+          justify="center"
           css={{ w: "100%" }}
         >
           {popularActors.map((actor) => (
