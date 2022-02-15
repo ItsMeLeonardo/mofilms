@@ -1,9 +1,31 @@
 import LinkNext from "next/link";
-import { Grid, Text } from "@nextui-org/react";
+import { Grid, Text, Button } from "@nextui-org/react";
+import { Category } from "react-iconly";
 
 import NavbarSetting from "./NavbarSetting";
 import NavbarLinks from "./NavbarLinks";
 import Logo from "../Logo";
+
+const navbarCss = {
+  position: "sticky",
+  top: "0",
+  zIndex: "300",
+  bg: "rgba(17, 17, 17, 0.85)",
+  bgBlur: "0.5rem",
+};
+
+const linksContainerResponsiveCss = {
+  "@smMax": {
+    position: "absolute",
+    top: "calc(100vh - ($18 + 1rem))",
+    height: "$18",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    padding: "0 1rem",
+  },
+};
 
 export default function Navbar() {
   return (
@@ -12,27 +34,39 @@ export default function Navbar() {
         justify="space-between"
         alignItems="center"
         wrap="nowrap"
-        css={{
-          position: "sticky",
-          top: "0",
-          zIndex: "20",
-          bg: "rgba(17, 17, 17, 0.85)",
-          bgBlur: "0.5rem",
-        }}
+        css={navbarCss}
       >
-        <Grid xs={1} sm={1} css={{ mr: "5rem" }}>
+        {/* Logo */}
+        <Grid xs={1} sm={1} css={{ mr: "5rem" }} alignItems="center">
           <LinkNext href="/">
             <a>
               <Logo />
-              <Text size={16} weight="bold" css={{ textGradient: "$gradBlue" }}>
+              <Text
+                size={16}
+                weight="bold"
+                css={{
+                  textGradient: "$gradBlue",
+                }}
+              >
                 MoFilms
               </Text>
             </a>
           </LinkNext>
         </Grid>
-        <Grid xs={0} sm={7} gap={2} align="center" justify="flex-start">
+
+        {/* Links */}
+        <Grid
+          className="navbar-links"
+          xs={12}
+          sm={7}
+          gap={2}
+          align="center"
+          justify="flex-start"
+          css={linksContainerResponsiveCss}
+        >
           <NavbarLinks />
         </Grid>
+        {/* Search and profile */}
         <Grid xs={11} sm={4}>
           <NavbarSetting />
         </Grid>

@@ -15,7 +15,8 @@ export default function NavbarSetting() {
       justify="flex-end"
       alignItems="center"
     >
-      <Grid alignItems="center" justify="center">
+      {/* SEARCHER */}
+      <Grid xs={0} sm={8} alignItems="center" justify="flex-end">
         <SearchInput label="What do we see today?" />
       </Grid>
       {/* NOTIFICATION */}
