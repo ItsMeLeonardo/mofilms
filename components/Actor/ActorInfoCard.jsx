@@ -1,10 +1,20 @@
-import { Text, Avatar, Col, Row, Button, Spacer } from "@nextui-org/react";
+import {
+  Text,
+  Avatar,
+  Col,
+  Row,
+  Button,
+  Spacer,
+  Grid,
+  Card,
+} from "@nextui-org/react";
 import { Send, Heart } from "react-iconly";
 
 export default function ActorInfoCard({
   photo,
   birthday = "2000-12-18",
   popularity = "10",
+  movies = null,
 } = {}) {
   const age = new Date().getFullYear() - new Date(birthday).getFullYear();
   return (
@@ -35,6 +45,24 @@ export default function ActorInfoCard({
             </Text>
           </Col>
         </Row>
+        {movies && (
+          <>
+            <Grid.Container gap={0.5}>
+              {movies.map(({ id, backdropImg, title }, index) => (
+                <Grid key={id} xs={index == 0 ? 12 : 6}>
+                  <Card.Image
+                    width="100%"
+                    height={80}
+                    objectFit="cover"
+                    src={backdropImg}
+                    alt={title}
+                  />
+                </Grid>
+              ))}
+            </Grid.Container>
+            <Spacer y={0.5} />
+          </>
+        )}
         <Row justify="space-between">
           <Button
             auto
@@ -57,6 +85,7 @@ export default function ActorInfoCard({
           />
         </Row>
       </Col>
+
       <style jsx>{`
       span {
         position: "absolute",
