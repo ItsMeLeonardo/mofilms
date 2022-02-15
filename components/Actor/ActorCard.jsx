@@ -21,7 +21,10 @@ export default function ActorCard({
 
   return (
     <Grid justify="center" align="center" css={{ py: ".75rem" }}>
-      <Tooltip content={<ActorInfoCard photo={photo} movies={movies} />}>
+      <Tooltip
+        content={<ActorInfoCard photo={photo} movies={movies} />}
+        css={{ bgBlur: ".5rem", bg: "rgba(51,51,51,.65)" }}
+      >
         <Avatar
           src={formatImageUrl(profile_path)}
           squared
