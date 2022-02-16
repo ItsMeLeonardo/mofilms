@@ -1,6 +1,5 @@
 import LinkNext from "next/link";
-import { Grid, Text, Button } from "@nextui-org/react";
-import { Category } from "react-iconly";
+import { Grid, Text } from "@nextui-org/react";
 
 import NavbarSetting from "./NavbarSetting";
 import NavbarLinks from "./NavbarLinks";
@@ -14,7 +13,7 @@ const navbarCss = {
   bgBlur: "0.5rem",
 };
 
-const linksContainerResponsiveCss = {
+const responsiveLinksContainerCss = {
   "@smMax": {
     position: "absolute",
     top: "calc(100vh - ($18 + 1rem))",
@@ -62,7 +61,7 @@ export default function Navbar() {
           gap={2}
           align="center"
           justify="flex-start"
-          css={linksContainerResponsiveCss}
+          css={responsiveLinksContainerCss}
         >
           <NavbarLinks />
         </Grid>

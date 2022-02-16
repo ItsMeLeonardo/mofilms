@@ -43,6 +43,7 @@ function NavbarLinkItem({
               name={iconLabel}
               size="small"
               stroke="bold"
+              filled={isInThisPage}
               primaryColor={isInThisPage ? "#A258DF" : "#666"}
             />
             <Text
