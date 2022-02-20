@@ -15,11 +15,10 @@ export default function HorizontalList({ children, gap = 2 } = {}) {
       </div>
 
       <style jsx>{`
-        .scroll-content {
-          overflow: auto hidden;
-        }
         .container {
+          width: 100%;
           position: relative;
+          z-index: 10;
         }
         .container::after {
           content: "";
@@ -30,6 +29,10 @@ export default function HorizontalList({ children, gap = 2 } = {}) {
           width: 2.5rem;
           height: 100%;
           background: linear-gradient(90deg, transparent, #111);
+        }
+        .scroll-content {
+          width: 100%;
+          overflow: auto hidden;
         }
         @media (min-width: 600px) {
           .container::after {
