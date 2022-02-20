@@ -2,7 +2,6 @@ import { Text } from "@nextui-org/react";
 
 import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
-import { addZeroToNumber } from "../../utils/formatString";
 
 const data = [
   {
@@ -74,7 +73,7 @@ export default function MostPopular() {
                 weight="bold"
                 css={{ lineHeight: "1.25rem" }}
               >
-                {addZeroToNumber(index + 1, 2)}
+                {(index + 1).toString().padStart(2, "0")}
               </Text>
             }
           />
