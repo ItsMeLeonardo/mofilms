@@ -8,7 +8,7 @@ const routes = [
   { route: "/movies/28", label: "Movies", iconLabel: "Video" },
   { route: "/tv/16", label: "Tv", iconLabel: "Image" },
   { route: "/actors", label: "Actors", iconLabel: "Star" },
-  { route: "/advancedSearch", label: "Advanced Search", iconLabel: "Search" },
+  // { route: "/advancedSearch", label: "Advanced Search", iconLabel: "Search" },
 ];
 
 const containerLinkCss = {
