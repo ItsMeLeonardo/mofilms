@@ -29,7 +29,7 @@ export default function Actors() {
         <Spacer />
 
         <Grid.Container
-          gap={4}
+          gap={1}
           align="center"
           justify="center"
           css={{ w: "100%" }}
