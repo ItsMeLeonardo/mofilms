@@ -1,4 +1,4 @@
-import { movieApi } from "../movieAPI";
+import { movieApi } from "../movieApi";
 
 const params = {
   language: "en-US",

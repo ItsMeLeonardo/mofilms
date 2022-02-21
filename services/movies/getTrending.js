@@ -1,4 +1,4 @@
-import { movieApi } from "../movieAPI";
+import { movieApi } from "../movieApi";
 
 export const trending = async () => {
   const { data } = await movieApi.get("/trending/movie/day");
