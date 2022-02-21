@@ -1,6 +1,6 @@
 import { trending } from "./getTrending";
-import { popular } from "./getPopular";
+import { topMovies } from "./getTop";
 
-const movieService = { trending, popular };
+const movieService = { trending, topMovies };
 
 export default movieService;

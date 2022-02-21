@@ -10,7 +10,7 @@ const params = {
   with_watch_monetization_types: "flatrate",
 };
 
-export const popular = async () => {
+export const topMovies = async () => {
   const { data } = await movieApi.get("/discover/movie", { params });
   return data;
 };
