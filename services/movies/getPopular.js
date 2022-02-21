@@ -11,6 +11,6 @@ const params = {
 };
 
 export const popular = async () => {
-  const { data } = await movieApi({ params }).get("/discover/movie");
+  const { data } = await movieApi.get("/discover/movie", { params });
   return data;
 };
