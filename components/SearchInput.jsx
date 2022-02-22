@@ -1,67 +1,29 @@
-import { useState } from "react";
-
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import { Button, Input, Spacer, Loading, Tooltip } from "@nextui-org/react";
 import { Search } from "react-iconly";
 
+import { useMovieSearch } from "../hooks/useMovieSearch";
+
 import KeywordResult from "./KeywordResults";
+import { debounce } from "../utils/debounce";
 
-const data = [
-  {
-    id: 9951,
-    name: "alien",
-  },
-  {
-    id: 4939,
-    name: "alien phenomenons",
-  },
-  {
-    id: 10158,
-    name: "alien planet",
-  },
-  {
-    id: 14909,
-    name: "alien invasion",
-  },
-  {
-    id: 15250,
-    name: "alien infection",
-  },
-  {
-    id: 12553,
-    name: "alien abduction",
-  },
-  {
-    id: 160515,
-    name: "alien contact",
-  },
-  {
-    id: 163488,
-    name: "human alien",
-  },
-];
-
-export default function SearchInput({ label = "Write a word" } = {}) {
+export default function SearchInput({ label = "Search movie" } = {}) {
   const [inputShowed, setInputShowed] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState(null);
+  const [keyword, setKeyword] = useState("");
+  const inputRef = useRef();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const input = event.target.keyword;
-    const keyword = input.value || "";
+  const router = useRouter();
 
-    if (keyword.trim().length === 0) return;
-    // console.log({ keyword });
-    setLoading(true);
+  const { isLoading, data: results, search } = useMovieSearch();
 
-    // reset values
-    setTimeout(() => {
-      setLoading(false);
-      setInputShowed(false);
-      input.value = "";
-    }, 1000);
-  };
+  useEffect(() => {
+    // reset values when changing route
+    setKeyword("");
+    inputRef.current.value = "";
+  }, [router.asPath]);
 
+  // show the searcher and close if the input is empty
   const handleClick = (event) => {
     const keyword = event.target.value || "";
     if (keyword.length !== 0) return;
@@ -69,31 +31,39 @@ export default function SearchInput({ label = "Write a word" } = {}) {
   };
 
   const handleChange = (event) => {
-    const keyword = event.target.value || "";
-    if (keyword.length < 3) return setResults(null);
-    setResults(data.filter((item) => item.name.includes(keyword)));
+    const value = event.target.value || "";
+    setKeyword(value);
+    search({ keyword: value });
   };
+
+  const debouncedHandleChange = debounce(handleChange, 500);
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <div className="input-container">
         <Tooltip
           trigger=""
-          visible={results}
+          visible={keyword.length !== 0}
           placement="bottom"
           content={<KeywordResult results={results} />}
+          css={{
+            maxH: "500px",
+            overflow: "auto",
+            "&::-webkit-scrollbar-thumb": {
+              bg: "$accents4",
+            },
+          }}
         >
           <Input
-            onChange={handleChange}
-            placeholder={label}
             type="search"
+            placeholder={label}
+            onChange={debouncedHandleChange}
             hidden={!inputShowed}
-            readOnly={loading}
             bordered={inputShowed}
             color="error"
-            helperText={inputShowed && "min 3 characters"}
             name="keyword"
             id="SearchInput"
+            ref={inputRef}
             arial-label="Search"
             css={{ bg: "#333" }}
           />
@@ -103,19 +73,19 @@ export default function SearchInput({ label = "Write a word" } = {}) {
           auto
           css={{ aspectRatio: "1/1" }}
           onClick={handleClick}
-          clickable={!loading}
+          clickable={!isLoading}
           color="error"
         >
-          {loading ? (
+          {isLoading ? (
             <Loading color="white" size="sm" />
           ) : (
             <Search size="small" stroke="bold" />
           )}
         </Button>
-      </form>
+      </div>
 
       <style jsx>{`
-        form {
+        .input-container {
           display: flex;
           align-items: center;
         }

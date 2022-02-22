@@ -1,11 +1,14 @@
-import { Button, Text } from "@nextui-org/react";
+import LinkNext from "next/link";
+import { Button, Text, Avatar, Spacer } from "@nextui-org/react";
+
+import { formatImageUrl } from "../services/formatImageUrl";
 
 export default function KeywordResult({ results } = {}) {
   if (results?.length === 0 || !results) {
     return (
       <Button disabled css={{ bg: "$accents1" }}>
         <Text h6 css={{ bg: "transparent" }}>
-          0 results for this keyword
+          0 not results
         </Text>
       </Button>
     );
@@ -13,15 +16,32 @@ export default function KeywordResult({ results } = {}) {
 
   return (
     <>
-      {results.map(({ id, name }) => (
-        <Button
-          key={id}
-          css={{ bg: "$accents1", "&:hover": { bg: "$gray900" } }}
-        >
-          <Text h6 css={{ bg: "transparent" }}>
-            {name}
-          </Text>
-        </Button>
+      {results.map(({ id, title, poster_path }) => (
+        <LinkNext key={id} href={`/movies/${id}`}>
+          <Button
+            css={{
+              bg: "$accents1",
+              justifyContent: "flex-start",
+              my: ".5rem",
+              "&:hover": { bg: "$gray900" },
+            }}
+            as="a"
+          >
+            <Avatar src={formatImageUrl(poster_path)} squared />
+            <Spacer />
+            <Text
+              h6
+              css={{
+                bg: "transparent",
+                maxW: "17ch",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {title}
+            </Text>
+          </Button>
+        </LinkNext>
       ))}
     </>
   );
