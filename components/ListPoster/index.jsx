@@ -24,7 +24,7 @@ export default function ListPoster({
   overlayPosition = "left",
 } = {}) {
   const [movieToShow, setMovieToShow] = useState(movies.at(0));
-  const poster = formatImageUrl(movieToShow.poster_path);
+  const poster = formatImageUrl(movieToShow.backdrop_path);
   return (
     <>
       <section className="poster">
@@ -34,6 +34,7 @@ export default function ListPoster({
           </Text>
 
           <PosterData
+            id={movieToShow?.id}
             votes={movieToShow?.vote_count}
             rate={movieToShow?.vote_average}
             releaseDate={movieToShow?.release_date}
@@ -41,7 +42,8 @@ export default function ListPoster({
           />
         </div>
         <PosterSlot
-          movies={movies.slice(1, movies.length)}
+          movies={movies}
+          movieSelected={movieToShow}
           onClick={setMovieToShow}
         />
       </section>

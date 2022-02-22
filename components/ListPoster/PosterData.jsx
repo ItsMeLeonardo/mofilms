@@ -1,4 +1,5 @@
 import { Text, Row, Button } from "@nextui-org/react";
+import NextLink from "next/link";
 import { Calendar, Star, People } from "react-iconly";
 
 import { formatDate } from "../../utils/formatDate";
@@ -32,9 +33,11 @@ export default function PosterData({ votes, releaseDate, rate, id, overview }) {
         </Text>
       </div>
       <Row justify="space-between" css={{ gap: "1rem" }}>
-        <Button auto shadow color="gradient" css={{ flexGrow: 1 }}>
-          Details
-        </Button>
+        <NextLink href={`/movies/${id}`}>
+          <Button auto as="a" shadow color="gradient" css={{ flexGrow: 1 }}>
+            Details
+          </Button>
+        </NextLink>
         <Button auto flat css={{ flexGrow: 1 }}>
           Watch
         </Button>
