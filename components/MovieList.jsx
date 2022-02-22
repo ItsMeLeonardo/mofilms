@@ -10,6 +10,7 @@ export default function MovieList({ movies = [] } = []) {
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}
+          id={movie.id}
           title={movie.title}
           date={formatDate(movie.date, { dateStyle: "medium" })}
           rate={movie.vote_average}

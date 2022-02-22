@@ -1,27 +1,38 @@
 import { memo } from "react";
+import { useRouter } from "next/router";
 import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
 import { Star } from "react-iconly";
-
-const defaultPoster =
-  "https://64.media.tumblr.com/a36311872444e745d703353dd12f9c85/1d81862d4bac390e-69/s1280x1920/2c160bfc7a32ca6aeb0f17c36bb224031c46f8d9.jpg";
 
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
 function MovieCard({
+  id,
   title = "",
   rate = 0,
   badge = null,
-  poster = defaultPoster,
+  poster,
   date = "",
   backdropImg = "",
   cols = 3,
   h = 400,
   className = "",
 } = {}) {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/movies/${id}`);
+  };
+
   const isRectangle = cols > 4;
   return (
     <>
-      <Grid xs={12} sm={3} md={cols} className={className}>
+      <Grid
+        xs={12}
+        sm={3}
+        md={cols}
+        onClick={handleClick}
+        className={className}
+      >
         <Card hoverable clickable cover css={{ w: "100%" }}>
           {badge && (
             <Card.Header

@@ -14,6 +14,7 @@ export default function MostPopular({ movies = [] } = {}) {
         {movies.map((movie, index) => (
           <MovieCard
             key={movie.id}
+            id={movie.id}
             title={movie.title}
             rate={movie.vote_average}
             poster={formatImageUrl(movie.poster_path)}
