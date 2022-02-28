@@ -8,6 +8,8 @@ export default function ActorCard({
   advanced,
   known_for = [],
 } = {}) {
+  if (!profile_path) return <></>;
+
   const photo = formatImageUrl(profile_path);
   let movies = null;
 
