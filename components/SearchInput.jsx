@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, Input, Spacer, Loading, Tooltip } from "@nextui-org/react";
 import { Search } from "react-iconly";
 
-import { useMovieSearch } from "../hooks/useMovieSearch";
+import { useSearch } from "../hooks/useSearch";
 
 import KeywordResult from "./KeywordResults";
 import { debounce } from "../utils/debounce";
@@ -15,7 +15,7 @@ export default function SearchInput({ label = "Search movie" } = {}) {
 
   const router = useRouter();
 
-  const { isLoading, data: results, search } = useMovieSearch();
+  const { isLoading, data: results, search } = useSearch("movie");
 
   useEffect(() => {
     // reset values when changing route
