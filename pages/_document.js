@@ -15,6 +15,7 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>{CssBaseline.flush()}</Head>
         <body>
+          <div id="portal" />
           <Main />
           <NextScript />
         </body>
