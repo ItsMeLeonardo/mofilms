@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
 
-export default function VideoCard({ videoId } = {}) {
+import movieService from "../services/movies";
+
+export default function VideoCard({ movieId, onClose = () => {} } = {}) {
   const [showCard, setShowCard] = useState(true);
+  const [videoId, setVideoId] = useState(null);
 
   useEffect(() => {
+    // Drag the video card
     const moveBar = document.querySelector("#moveBar");
     const videoContainer = document.querySelector("#videoCardContainer");
 
     const moveCard = (event) => {
+      event.stopPropagation();
       let shiftX = event.clientX - moveBar.getBoundingClientRect().left;
-      let shiftY = event.clientY - moveBar.getBoundingClientRect().top;
+      // let shiftY = event.clientY - moveBar.getBoundingClientRect().top;
 
       function moveAt(pageX, pageY) {
         videoContainer.style.left = `${pageX - shiftX}px`;
-        videoContainer.style.top = `${pageY - shiftY}px`;
+        // videoContainer.style.top = `${pageY - shiftY}px`;
       }
 
       moveAt(event.pageX, event.pageY);
@@ -37,16 +42,30 @@ export default function VideoCard({ videoId } = {}) {
     };
   }, []);
 
+  useEffect(() => {
+    movieService.video(movieId).then((video) => {
+      setVideoId(video.key);
+    });
+  }, []);
+
+  const closeCard = () => {
+    setShowCard(false);
+    onClose();
+  };
+
   if (!showCard) {
     return null;
   }
 
   return (
     <>
-      <section id="videoCardContainer">
+      <section
+        id="videoCardContainer"
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="move-bar" id="moveBar">
           <b></b>
-          <button className="close-card" onClick={() => setShowCard(false)}>
+          <button className="close-card" onClick={closeCard}>
             <i className="gg-close"></i>
           </button>
         </div>
@@ -59,6 +78,7 @@ export default function VideoCard({ videoId } = {}) {
               playerVars: {
                 mute: 1,
                 modestbranding: 1,
+                autoplay: 1,
               },
             }}
             containerClassName="video-container"
@@ -73,8 +93,8 @@ export default function VideoCard({ videoId } = {}) {
       <style jsx>{`
         @import url("https://css.gg/close.css");
         section {
-          position: absolute;
-          top: 60px;
+          position: fixed;
+          top: 80px;
           right: 16px;
           z-index: 1000;
           width: 100%;
