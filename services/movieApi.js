@@ -2,7 +2,6 @@ import axios from "axios";
 
 const headersList = {
   Accept: "*/*",
-  "User-Agent": "Thunder Client (https://www.thunderclient.com)",
 };
 
 export const movieApi = axios.create({
