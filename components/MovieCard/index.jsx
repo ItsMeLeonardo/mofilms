@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
 import { Star } from "react-iconly";
 
+import BtnToSeeTrailer from "./BtnToSeeTrailer";
+
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
 function MovieCard({
@@ -34,20 +36,21 @@ function MovieCard({
         className={className}
       >
         <Card hoverable clickable cover css={{ w: "100%" }}>
-          {badge && (
-            <Card.Header
-              css={{
-                position: "absolute",
-                zIndex: 1,
-                top: 0,
-                background: overlayGradient,
-              }}
-            >
+          <Card.Header
+            css={{
+              position: "absolute",
+              zIndex: 1,
+              top: 0,
+              background: overlayGradient,
+            }}
+          >
+            <BtnToSeeTrailer movieId={id} />
+            {badge && (
               <Row align="center" justify="flex-end">
                 <span className="badge">{badge}</span>
               </Row>
-            </Card.Header>
-          )}
+            )}
+          </Card.Header>
           <Card.Body>
             <Card.Image
               src={(isRectangle && backdropImg) || poster}
