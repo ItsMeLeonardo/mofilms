@@ -22,7 +22,7 @@ export default function Actors({ popularActors = [] } = {}) {
       <PopularActors actors={popularActors} />
       <Spacer />
 
-      <Col align="center" justify="center">
+      <div>
         <Text h2 css={{ textGradient: "$gradRed" }} weight="bold">
           Search an Actor
         </Text>
@@ -51,15 +51,8 @@ export default function Actors({ popularActors = [] } = {}) {
               <ActorCard key={actor.id} {...actor} advanced />
             ))}
         </Grid.Container>
-      </Col>
-      <style jsx>{`
-      span {
-        position: "absolute",
-        width: "100%",
-        display: "flex",
-        justify-content: "center",
-      }
-        `}</style>
+      </div>
+      <style jsx>{``}</style>
     </>
   );
 }
