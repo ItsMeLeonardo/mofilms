@@ -5,7 +5,6 @@ import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
 
 import { formatDate } from "../../utils/formatDate";
-import { formatImageUrl } from "../../services/formatImageUrl";
 
 const Badge = ({ popularity }) => (
   <>
@@ -27,9 +26,9 @@ export default function MostPopular({ movies = [] } = {}) {
             id={movie.id}
             title={movie.title}
             rate={movie.vote_average}
-            poster={formatImageUrl(movie.poster_path)}
+            poster={movie.poster_path}
             date={formatDate(movie.release_date, { dateStyle: "medium" })}
-            backdropImg={formatImageUrl(movie.backdrop_path)}
+            backdropImg={movie.backdrop_path}
             badge={<Badge popularity={movie.vote_count} />}
           />
         ))}

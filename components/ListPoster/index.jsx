@@ -3,7 +3,7 @@ import { Text } from "@nextui-org/react";
 import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
 
-import { formatImageUrl } from "../../services/formatImageUrl";
+import { imageUrl } from "../../services/images";
 
 const overlayPositionInDeg = {
   bottom: "180deg",
@@ -24,7 +24,7 @@ export default function ListPoster({
   overlayPosition = "left",
 } = {}) {
   const [movieToShow, setMovieToShow] = useState(movies.at(0));
-  const poster = formatImageUrl(movieToShow.backdrop_path);
+  const poster = imageUrl.backdrop_sizes.w300(movieToShow.backdrop_path);
   return (
     <>
       <section className="poster">

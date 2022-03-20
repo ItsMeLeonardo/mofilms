@@ -3,7 +3,6 @@ import { Text } from "@nextui-org/react";
 import HorizontalList from "../HorizontalList";
 import MovieCard from "../MovieCard";
 
-import { formatImageUrl } from "../../services/formatImageUrl";
 import { formatDate } from "../../utils/formatDate";
 
 export default function MostPopular({ movies = [] } = {}) {
@@ -17,9 +16,9 @@ export default function MostPopular({ movies = [] } = {}) {
             id={movie.id}
             title={movie.title}
             rate={movie.vote_average}
-            poster={formatImageUrl(movie.poster_path)}
+            poster={movie.poster_path}
             date={formatDate(movie.release_date, { dateStyle: "medium" })}
-            backdropImg={formatImageUrl(movie.backdrop_path)}
+            backdropImg={movie.backdrop_path}
             cols={index === 0 ? 6 : 3}
             badge={
               <Text

@@ -2,7 +2,6 @@ import { Grid } from "@nextui-org/react";
 
 import MovieCard from "./MovieCard";
 import { formatDate } from "../utils/formatDate";
-import { formatImageUrl } from "../services/formatImageUrl";
 
 export default function MovieList({ movies = [] } = []) {
   return (
@@ -14,7 +13,7 @@ export default function MovieList({ movies = [] } = []) {
           title={movie.title}
           date={formatDate(movie.date, { dateStyle: "medium" })}
           rate={movie.vote_average}
-          poster={formatImageUrl(movie.poster_path)}
+          poster={movie.poster_path}
           h={350}
           className="movieList-item"
         />

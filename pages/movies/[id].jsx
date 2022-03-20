@@ -7,7 +7,7 @@ import MovieList from "../../components/MovieList";
 import MovieCast from "../../components/MovieDetail/MovieCast";
 import MovieData from "../../components/MovieDetail/MovieData";
 import MovieOptions from "../../components/MovieDetail/MovieOptions";
-import { formatImageUrl } from "../../services/formatImageUrl";
+import { imageUrl } from "../../services/images";
 
 import movieService from "../../services/movies";
 
@@ -35,7 +35,7 @@ export default function MovieDetails({ movie = null } = {}) {
       <DetailPoster
         title={`${movie.title} (${new Date(movie.release_date).getFullYear()})`}
         overlayPosition="bottom"
-        poster={formatImageUrl(movie.backdrop_path)}
+        poster={imageUrl.backdrop_sizes.w300(movie.backdrop_path)}
       />
       <Grid.Container css={{ position: "relative", bottom: "10rem" }}>
         {/* options */}

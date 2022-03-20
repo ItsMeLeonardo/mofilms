@@ -5,6 +5,9 @@ import { Star } from "react-iconly";
 
 import BtnToSeeTrailer from "./BtnToSeeTrailer";
 
+import { useResponsive } from "../../hooks/useResponsive";
+import { imageUrl } from "../../services/images";
+
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
 function MovieCard({
@@ -20,12 +23,16 @@ function MovieCard({
   className = "",
 } = {}) {
   const router = useRouter();
+  const { widthScreen, currentScreen } = useResponsive();
+  console.log({ widthScreen, currentScreen });
 
   const handleClick = () => {
     router.push(`/movies/${id}`);
   };
 
   const isRectangle = cols > 4;
+  const posterUrl = imageUrl.poster_sizes.w185(poster);
+  const backdropUrl = imageUrl.backdrop_sizes.w300(backdropImg);
   return (
     <>
       <Grid
@@ -53,7 +60,7 @@ function MovieCard({
           </Card.Header>
           <Card.Body>
             <Card.Image
-              src={(isRectangle && backdropImg) || poster}
+              src={(isRectangle && backdropUrl) || posterUrl}
               height={h}
               width="100%"
               alt="Relaxing app background"

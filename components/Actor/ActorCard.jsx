@@ -1,6 +1,6 @@
 import { Tooltip, Text, Grid, Card } from "@nextui-org/react";
 import ActorInfoCard from "./ActorInfoCard";
-import { formatImageUrl } from "../../services/formatImageUrl";
+import { imageUrl } from "../../services/images";
 
 export default function ActorCard({
   profile_path,
@@ -10,7 +10,7 @@ export default function ActorCard({
 } = {}) {
   if (!profile_path) return <></>;
 
-  const photo = formatImageUrl(profile_path);
+  const photo = imageUrl.profile_sizes.w185(profile_path);
   let movies = null;
 
   // if advanced is true, show the known_for movies(images) in tooltip
@@ -18,7 +18,7 @@ export default function ActorCard({
     movies = known_for.slice(0, 3).map(({ id, title, poster_path }) => ({
       id,
       title,
-      backdropImg: formatImageUrl(poster_path),
+      backdropImg: imageUrl.poster_sizes.w185(poster_path),
     }));
   }
 
@@ -51,7 +51,7 @@ export default function ActorCard({
             objectFit="cover"
             width="100%"
             height="250px"
-            src={formatImageUrl(profile_path)}
+            src={photo}
             alt={name}
           />
           <Card.Footer
