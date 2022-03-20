@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Head from "next/head";
 
 import { Text, Grid } from "@nextui-org/react";
 
@@ -32,6 +33,11 @@ export default function MovieDetails({ movie = null } = {}) {
 
   return (
     <>
+      <Head>
+        <title>{movie.title}</title>
+        <meta name="description" content={movie?.overview} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <DetailPoster
         title={`${movie.title} (${new Date(movie.release_date).getFullYear()})`}
         overlayPosition="bottom"
