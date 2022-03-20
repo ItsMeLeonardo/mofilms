@@ -4,9 +4,10 @@
  * @returns {String} formatted date
  */
 export const formatDate = (
-  date,
+  date = "",
   { lang = "en-US", dateStyle = "full" } = {}
 ) => {
+  if (date.trim().length === 0) return "N/A";
   const dateToFormat = typeof date === "string" ? new Date(date) : date;
 
   const intl = new Intl.DateTimeFormat(lang, { dateStyle });
