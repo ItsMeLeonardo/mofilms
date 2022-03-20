@@ -24,7 +24,6 @@ function MovieCard({
 } = {}) {
   const router = useRouter();
   const { widthScreen, currentScreen } = useResponsive();
-  console.log({ widthScreen, currentScreen });
 
   const handleClick = () => {
     router.push(`/movies/${id}`);
@@ -100,7 +99,7 @@ function MovieCard({
                 <Row gap={0.5} justify="flex-end" align="center">
                   <Star stroke="bold" />
                   <Text size={14} weight="bold" css={{ lineHeight: 0 }}>
-                    {rate}
+                    {Number(rate).toFixed(1)}
                   </Text>
                 </Row>
               </Col>
