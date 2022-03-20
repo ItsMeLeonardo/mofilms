@@ -64,7 +64,7 @@ export default function VideoCard({ movieId, onClose = () => {} } = {}) {
         onClick={(event) => event.stopPropagation()}
       >
         <div className="move-bar" id="moveBar">
-          <b></b>
+          <i className="gg-arrow-align-h"></i>
           <button className="close-card" onClick={closeCard}>
             <i className="gg-close"></i>
           </button>
@@ -92,6 +92,7 @@ export default function VideoCard({ movieId, onClose = () => {} } = {}) {
 
       <style jsx>{`
         @import url("https://css.gg/close.css");
+        @import url("https://css.gg/arrow-align-h.css");
         section {
           position: fixed;
           top: 80px;
@@ -114,15 +115,6 @@ export default function VideoCard({ movieId, onClose = () => {} } = {}) {
           position: relative;
           cursor: move;
           max-height: 1.25rem;
-        }
-        .move-bar b {
-          --size: 0.25rem;
-          width: var(--size);
-          height: var(--size);
-          background: var(--nextui-colors-accents7);
-          border-radius: 50%;
-          box-shadow: 0.5rem 0 0rem var(--nextui-colors-accents7),
-            -0.5rem 0 0rem var(--nextui-colors-accents7);
         }
         .close-card {
           height: 100%;
