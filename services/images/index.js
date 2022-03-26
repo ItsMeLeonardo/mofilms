@@ -21,7 +21,8 @@ const imageSize = (imageType) => {
           );
         }
         return (path) => {
-          if (!path.startsWith("/")) path = `/${path}`;
+          if (!path) return;
+          if (!path?.startsWith("/")) path = `/${path}`;
           return `${baseUrl}${size}${path}`;
         };
       },

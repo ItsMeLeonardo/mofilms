@@ -53,7 +53,7 @@ export default function Navbar() {
           </LinkNext>
         </Grid>
 
-        {/* Links */}
+        {/* Links to pages */}
         <Grid
           className="navbar-links"
           xs={12}
@@ -65,7 +65,8 @@ export default function Navbar() {
         >
           <NavbarLinks />
         </Grid>
-        {/* Search and profile */}
+
+        {/* Search notify, and profile */}
         <Grid xs={11} sm={4}>
           <NavbarSetting />
         </Grid>

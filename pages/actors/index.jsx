@@ -1,4 +1,5 @@
-import { Row, Spacer, Text, Grid, Col, Input } from "@nextui-org/react";
+import { Row, Spacer, Text, Grid, Input } from "@nextui-org/react";
+import Head from "next/head";
 import { Search } from "react-iconly";
 
 import PopularActors from "../../components/Actor/PopularActors";
@@ -19,10 +20,18 @@ export default function Actors({ popularActors = [] } = {}) {
 
   return (
     <>
+      <Head>
+        <title>Actors</title>
+        <meta
+          name="description"
+          content="The most popular actors of this week"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <PopularActors actors={popularActors} />
       <Spacer />
 
-      <Col align="center" justify="center">
+      <div>
         <Text h2 css={{ textGradient: "$gradRed" }} weight="bold">
           Search an Actor
         </Text>
@@ -51,15 +60,8 @@ export default function Actors({ popularActors = [] } = {}) {
               <ActorCard key={actor.id} {...actor} advanced />
             ))}
         </Grid.Container>
-      </Col>
-      <style jsx>{`
-      span {
-        position: "absolute",
-        width: "100%",
-        display: "flex",
-        justify-content: "center",
-      }
-        `}</style>
+      </div>
+      <style jsx>{``}</style>
     </>
   );
 }

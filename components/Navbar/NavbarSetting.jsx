@@ -19,17 +19,19 @@ export default function NavbarSetting() {
       alignItems="center"
     >
       {/* SEARCHER */}
-      <Grid xs={1} sm={8} alignItems="center" justify="flex-end">
+      <Grid sm={8} alignItems="center" justify="flex-end">
         <SearchInput label="What do we see today?" />
       </Grid>
+
       {/* NOTIFICATION */}
-      <Grid xs={0} sm={2} alignItems="center" justify="center">
+      <Grid sm={2} alignItems="center" justify="center">
         <Avatar
           squared
           icon={<Notification size="small" stroke="bold" primaryColor="#fff" />}
           css={{ cursor: "pointer" }}
         />
       </Grid>
+
       {/* AVATAR */}
       <Grid alignItems="center" justify="center">
         {/* <ProfileOptions /> */}
