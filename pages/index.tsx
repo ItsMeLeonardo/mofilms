@@ -11,8 +11,8 @@ import { Result as TopResults } from "services/movies/top/types";
 import { Result as TrendingResults } from "services/movies/trending/types";
 
 interface Props {
-  topMovies: TopResults;
-  trending: TrendingResults;
+  topMovies: TopResults[];
+  trending: TrendingResults[];
 }
 
 export default function Home({ topMovies, trending }: Props) {

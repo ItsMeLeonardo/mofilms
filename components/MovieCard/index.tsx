@@ -3,25 +3,29 @@ import { useRouter } from "next/router";
 import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
 import { Star } from "react-iconly";
 
+// components
 import BtnToSeeTrailer from "./BtnToSeeTrailer";
+// utils
+import { useResponsive } from "hooks/useResponsive";
+import imageService from "services/images";
+//types
+import { MovieCardProps, defaultProps } from "./types";
 
-import { useResponsive } from "../../hooks/useResponsive";
-import imageService from 'services/images'
-
+//nextUI css
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
 function MovieCard({
-  id = '',
-  title = "",
-  rate = 0,
-  badge = null,
-  poster = '',
-  date = "",
-  backdropImg = "",
-  cols = 3,
-  h = 400,
-  className = "",
-} = {}) {
+  id,
+  title,
+  rate,
+  badge,
+  poster,
+  date,
+  backdrop,
+  cols,
+  h,
+  className,
+}: MovieCardProps = defaultProps) {
   const router = useRouter();
   const { widthScreen, currentScreen } = useResponsive();
 
@@ -30,8 +34,8 @@ function MovieCard({
   };
 
   const isRectangle = cols > 4;
-  const posterUrl = imageService.poster.w185(poster)
-  const backdropUrl = imageService.backdrop.w300(backdropImg)
+  const posterUrl = imageService.poster.w185(poster);
+  const backdropUrl = imageService.backdrop.w300(backdrop);
   return (
     <>
       <Grid

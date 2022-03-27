@@ -1,11 +1,14 @@
 import { Text } from "@nextui-org/react";
 
+//components
 import HorizontalList from "components/HorizontalList";
 import MovieCard from "components/MovieCard";
-
+//utils
 import { formatDate } from "utils/formatDate";
+//types
+import { Props } from "./types";
 
-export default function MostPopular({ movies = [] } = {}) {
+export default function MostPopular({ movies = [] }: Props = {}) {
   return (
     <>
       <h1>Most popular</h1>
@@ -18,7 +21,7 @@ export default function MostPopular({ movies = [] } = {}) {
             rate={movie.vote_average}
             poster={movie.poster_path}
             date={formatDate(movie.release_date, { dateStyle: "medium" })}
-            backdropImg={movie.backdrop_path}
+            backdrop={movie.backdrop_path}
             cols={index === 0 ? 6 : 3}
             badge={
               <Text
