@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import Head from "next/head";
 
@@ -63,11 +64,11 @@ export default function MovieDetails({ movie = null } = {}) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { id } = params;
 
   try {
-    const movie = await movieService.details(id);
+    const movie = await movieService.details(id as string);
     return {
       props: {
         movie,
@@ -81,4 +82,4 @@ export async function getServerSideProps({ params }) {
       },
     };
   }
-}
+};

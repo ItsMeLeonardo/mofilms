@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import { Row, Spacer, Text, Grid, Input } from "@nextui-org/react";
 import Head from "next/head";
 import { Search } from "react-iconly";
@@ -66,11 +67,11 @@ export default function Actors({ popularActors = [] } = {}) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { results: popularActors } = await actorService.popular();
   return {
     props: {
       popularActors,
     },
   };
-}
+};

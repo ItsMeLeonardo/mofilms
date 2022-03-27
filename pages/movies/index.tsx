@@ -1,3 +1,4 @@
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import ListPoster from "components/ListPoster";
@@ -16,7 +17,7 @@ export default function Movies({ popular }) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { results: popular } = await movieService.popular();
   return { props: { popular } };
-}
+};
