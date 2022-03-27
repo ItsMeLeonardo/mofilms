@@ -1,21 +1,23 @@
 import { Grid } from "@nextui-org/react";
-
-import HorizontalList from "../HorizontalList";
+//components
+import HorizontalList from "components/HorizontalList";
 import PosterSlotItem from "./PosterSlotItem";
+//types
+import { PosterSlotProps } from "./types";
 
 export default function PosterSlot({
-  movies = [],
+  movies,
   movieSelected,
-  onClick = () => {},
-} = {}) {
+  onClick,
+}: PosterSlotProps) {
   return (
     <>
-      <HorizontalList className="poster-movie-list">
+      <HorizontalList>
         {movies.map((movie) => (
           <Grid key={movie.title} onClick={() => onClick(movie)}>
             <PosterSlotItem
               movie={movie}
-              isSelected={movieSelected?.id === movie.id}
+              isSelected={movieSelected.id === movie.id}
             />
           </Grid>
         ))}

@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { Text } from "@nextui-org/react";
+//components
 import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
-
+// utils
 import imageService from "services/images";
-
+//types
+import { Result as PopularResult } from "services/movies/popular/types";
+import { ListPosterProps } from "./types";
+//nextUI css
 const overlayPositionInDeg = {
   bottom: "180deg",
   top: "0deg",
@@ -19,18 +23,18 @@ const titlePosterCss = {
   "@md": { fontSize: "3rem", whiteSpace: "nowrap" },
 };
 
-export default function ListPoster({
-  movies = [],
-  overlayPosition = "left",
-} = {}) {
-  const [movieToShow, setMovieToShow] = useState(movies.at(0));
+export default function ListPoster(
+  { movies = [], overlayPosition = "left" }: ListPosterProps = { movies: [] }
+) {
+  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies.at(0));
   const poster = imageService.backdrop.w300(movieToShow.backdrop_path);
+
   return (
     <>
       <section className="poster">
         <div className="poster-data">
           <Text h2 size="3rem" weight="medium" css={titlePosterCss}>
-            {movieToShow?.title}
+            {movieToShow.title}
           </Text>
 
           <PosterData

@@ -1,8 +1,10 @@
 import { Card, Text } from "@nextui-org/react";
 import { Show } from "react-iconly";
-
+//utils
 import imageService from "services/images";
-
+//types
+import { PosterSlotItemProps } from "./types";
+//nextUI css
 const cardSelectedCss = {
   "&::before": {
     content: "",
@@ -45,7 +47,10 @@ function CardSelectedIcon() {
   );
 }
 
-export default function PosterSlotItem({ movie, isSelected }) {
+export default function PosterSlotItem({
+  movie,
+  isSelected,
+}: PosterSlotItemProps) {
   return (
     <>
       <Card

@@ -1,10 +1,18 @@
 import { Text, Row, Button } from "@nextui-org/react";
 import NextLink from "next/link";
 import { Calendar, Star, People } from "react-iconly";
+//utils
+import { formatDate } from "utils/formatDate";
+//types
+import { PosterDataProps } from "./types";
 
-import { formatDate } from "../../utils/formatDate";
-
-export default function PosterData({ votes, releaseDate, rate, id, overview }) {
+export default function PosterData({
+  votes,
+  releaseDate,
+  rate,
+  id,
+  overview,
+}: PosterDataProps) {
   return (
     <>
       <Row gap={0.5}>

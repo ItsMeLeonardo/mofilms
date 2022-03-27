@@ -1,10 +1,17 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
-
+// components
 import ListPoster from "components/ListPoster";
+//utils
 import movieService from "services/movies";
+//types
+import { Result as PopularResult } from "services/movies/popular/types";
 
-export default function Movies({ popular }) {
+interface Props {
+  popular: PopularResult[];
+}
+
+export default function Movies({ popular }: Props) {
   return (
     <>
       <Head>
