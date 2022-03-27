@@ -1,13 +1,13 @@
-import { Grid, Avatar, Tooltip } from "@nextui-org/react";
+import { Grid, Avatar, Tooltip, CSS } from "@nextui-org/react";
 import { Notification } from "react-iconly";
-
-import SearchInput from "../SearchInput";
-import ProfileOptions from "../Profile/ProfileOptions";
+//components
+import SearchInput from "components/SearchInput";
+import ProfileOptions from "components/Profile/ProfileOptions";
 
 const defaultAvatar =
   "https://i.pinimg.com/236x/29/68/3b/29683b54520b500a531ad18a4534c85e.jpg";
 
-const tooltipCss = { bgBlur: ".5rem", bg: "rgba(51,51,51,.65)" };
+const tooltipCss: CSS = { bgBlur: ".5rem", bg: "rgba(51,51,51,.65)" };
 
 export default function NavbarSetting() {
   return (

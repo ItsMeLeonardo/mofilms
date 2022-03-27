@@ -1,9 +1,11 @@
 import { memo } from "react";
 import LinkNext from "next/link";
 import { Iconly } from "react-iconly";
-import { Grid, Link, Text } from "@nextui-org/react";
-
-const linkItemCss = {
+import { Grid, Link, Text, CSS } from "@nextui-org/react";
+//types
+import { NavbarLinkItemProps } from "./types";
+//nextUI css
+const linkItemCss: CSS = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -15,7 +17,7 @@ const linkItemCss = {
   },
 };
 
-const linkTextCss = {
+const linkTextCss: CSS = {
   fontWeight: "bold",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -32,8 +34,8 @@ function NavbarLinkItem({
   route,
   isInThisPage,
   label,
-  iconLabel = "Search",
-} = {}) {
+  iconLabel,
+}: NavbarLinkItemProps) {
   return (
     <>
       <Grid css={{ "@xs": { mr: "1.5rem" } }}>

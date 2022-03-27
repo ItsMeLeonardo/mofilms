@@ -1,11 +1,12 @@
 import LinkNext from "next/link";
-import { Grid, Text } from "@nextui-org/react";
-
+import { Grid, Text, CSS } from "@nextui-org/react";
+//components
 import NavbarSetting from "./NavbarSetting";
 import NavbarLinks from "./NavbarLinks";
-import Logo from "../Logo";
+import Logo from "components/Logo";
 
-const navbarCss = {
+// NextUI css
+const navbarCss: CSS = {
   position: "sticky",
   top: "0",
   zIndex: "300",
@@ -13,7 +14,7 @@ const navbarCss = {
   bgBlur: "0.5rem",
 };
 
-const responsiveLinksContainerCss = {
+const responsiveLinksContainerCss: CSS = {
   "@smMax": {
     position: "absolute",
     top: "calc(100vh - ($18 + 1rem))",

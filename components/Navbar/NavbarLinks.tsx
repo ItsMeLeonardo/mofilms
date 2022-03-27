@@ -1,16 +1,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Grid } from "@nextui-org/react";
+import { Grid, CSS } from "@nextui-org/react";
 
+//components
 import NavbarLinkItem from "./NavbarLinkItem";
-
-const routes = [
-  { route: "/movies", label: "Movies", iconLabel: "Video" },
-  { route: "/tv", label: "Tv", iconLabel: "Image" },
-  { route: "/actors", label: "Actors", iconLabel: "Star" },
-];
-
-const containerLinkCss = {
+//types
+import { Route } from "./types";
+//nextUI css
+const containerLinkCss: CSS = {
   "@smMax": {
     bg: "$accents1",
     h: "100%",
@@ -19,6 +16,12 @@ const containerLinkCss = {
     justifyContent: "space-between",
   },
 };
+
+const routes: Route[] = [
+  { route: "/movies", label: "Movies", iconLabel: "Video" },
+  { route: "/tv", label: "Tv", iconLabel: "Image" },
+  { route: "/actors", label: "Actors", iconLabel: "Star" },
+];
 
 export default function Navbar() {
   const router = useRouter();
