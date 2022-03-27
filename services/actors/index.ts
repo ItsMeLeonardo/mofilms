@@ -1,4 +1,4 @@
-import { popular } from "./getPopular";
+import { popular } from "./popular";
 import { search } from "./search";
 
 const actorService = { popular, search };
