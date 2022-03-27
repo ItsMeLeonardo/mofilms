@@ -2,23 +2,27 @@ import { useState, useEffect } from "react";
 import { Grid, Col, Text, Card, Row, Avatar, Button } from "@nextui-org/react";
 import { Heart2 } from "react-iconly";
 
-import { useNearScreen } from "../../hooks/useNearScreen";
-import movieService from "../../services/movies";
-
+//utils
+import { useNearScreen } from "hooks/useNearScreen";
+import movieService from "services/movies";
 import imageService from "services/images";
+// types
+import { Cast } from "services/movies/credits/types";
+import { MovieCardProps } from "./types";
 
-export default function MovieCast({ id }) {
-  const [castData, setCastData] = useState(null);
+export default function MovieCast({ id }: MovieCardProps) {
+  const [castData, setCastData] = useState<Cast[]>(null);
 
   const { elementRef: castRef, isNearScreen: isNearScreen } = useNearScreen();
 
   useEffect(() => {
     if (isNearScreen) {
-      movieService.credits(id).then((data) => {
+      movieService.credits(id.toString()).then((data) => {
         setCastData(data.cast);
       });
     }
-  }, [isNearScreen]);
+  }, [isNearScreen, id]);
+
   return (
     <>
       {/* Cast */}

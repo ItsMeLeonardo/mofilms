@@ -1,5 +1,9 @@
 import { Text } from "@nextui-org/react";
 
+//types
+import { DetailPosterProps, defaultDetailPosterProps } from "./types";
+
+// nextUI css
 const overlayPositionInDeg = {
   bottom: "180deg",
   top: "0deg",
@@ -18,7 +22,7 @@ export default function DetailPoster({
   poster,
   overlayPosition = "bottom",
   title = "",
-} = {}) {
+}: DetailPosterProps = defaultDetailPosterProps) {
   return (
     <>
       <section className="poster">

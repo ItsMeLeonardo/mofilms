@@ -1,9 +1,11 @@
 import { Grid, Col, Text, Row, Spacer } from "@nextui-org/react";
+//utils
+import { formatCurrency } from "utils/formatCurrency";
+import { formatDate } from "utils/formatDate";
+//types
+import { MovieDataProps } from "./types";
 
-import { formatCurrency } from "../../utils/formatCurrency";
-import { formatDate } from "../../utils/formatDate";
-
-export default function MovieData({ movie }) {
+export default function MovieData({ movie }: MovieDataProps) {
   return (
     <>
       <Grid xs={12} sm={6.5} md={7}>
