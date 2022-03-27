@@ -10,13 +10,16 @@ import {
 } from "@nextui-org/react";
 import { Send, Heart } from "react-iconly";
 
-export default function ActorInfoCard({
-  photo,
-  birthday = "2000-12-18",
-  popularity = "10",
-  movies = null,
-} = {}) {
-  const age = new Date().getFullYear() - new Date(birthday).getFullYear();
+//utils
+import ImageService from "services/images";
+//types
+import { ActorInfoCardProps } from "./types";
+export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
+  const { profile_path, popularity } = actor;
+
+  const photo = ImageService.profile.w185(profile_path);
+
+  const age = new Date().getFullYear() - new Date("03-25-2003").getFullYear();
   return (
     <>
       <Col css={{ w: "12rem" }}>
@@ -48,13 +51,13 @@ export default function ActorInfoCard({
         {movies && (
           <>
             <Grid.Container gap={0.5}>
-              {movies.map(({ id, backdropImg, title }, index) => (
+              {movies.map(({ id, backdrop_path, title }, index) => (
                 <Grid key={id} xs={index == 0 ? 12 : 6}>
                   <Card.Image
                     width="100%"
                     height={80}
                     objectFit="cover"
-                    src={backdropImg}
+                    src={ImageService.backdrop.w300(backdrop_path)}
                     alt={title}
                   />
                 </Grid>

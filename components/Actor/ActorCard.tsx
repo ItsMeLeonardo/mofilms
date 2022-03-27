@@ -1,32 +1,28 @@
 import { Tooltip, Text, Grid, Card } from "@nextui-org/react";
+//components
 import ActorInfoCard from "./ActorInfoCard";
-
+//utils
 import imageService from "services/images";
+//types
+import { KnownFor } from "services/actors/types/knowFor";
+import { ActorCardProps } from "./types";
 
-export default function ActorCard({
-  profile_path = "",
-  name = "",
-  advanced = false,
-  known_for = [],
-} = {}) {
+export default function ActorCard({ actor, advancedData }: ActorCardProps) {
+  const { profile_path, known_for, name } = actor;
   if (!profile_path) return <></>;
 
   const photo = imageService.profile.w185(profile_path);
-  let movies = null;
+  let movies: KnownFor[] = null;
 
   // if advanced is true, show the known_for movies(images) in tooltip
-  if (advanced) {
-    movies = known_for.slice(0, 3).map(({ id, title, poster_path }) => ({
-      id,
-      title,
-      backdropImg: imageService.poster.w154(poster_path),
-    }));
+  if (advancedData) {
+    movies = known_for.slice(0, 3);
   }
 
   return (
-    <Grid justify="center" align="center">
+    <Grid justify="center">
       <Tooltip
-        content={<ActorInfoCard photo={photo} movies={movies} />}
+        content={<ActorInfoCard actor={actor} movies={movies} />}
         css={{ bgBlur: ".5rem", bg: "rgba(51,51,51,.65)" }}
       >
         <Card

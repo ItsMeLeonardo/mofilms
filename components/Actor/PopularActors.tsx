@@ -1,9 +1,14 @@
 import { Spacer } from "@nextui-org/react";
 
-import HorizontalList from "../HorizontalList";
+//components
+import HorizontalList from "components/HorizontalList";
 import ActorCard from "./ActorCard";
+//types
+import { PopularActorsProps } from "./types";
 
-export default function PopularActors({ actors = [] } = {}) {
+export default function PopularActors({
+  actors = [],
+}: PopularActorsProps = {}) {
   return (
     <>
       <Spacer />
@@ -11,7 +16,7 @@ export default function PopularActors({ actors = [] } = {}) {
       <Spacer />
       <HorizontalList gap={3}>
         {actors.map((actor) => (
-          <ActorCard key={actor.id} {...actor} />
+          <ActorCard key={actor.id} actor={actor} />
         ))}
       </HorizontalList>
     </>
