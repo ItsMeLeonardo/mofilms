@@ -1,7 +1,7 @@
 import LinkNext from "next/link";
 import { Button, Text, Avatar, Spacer } from "@nextui-org/react";
 
-import { imageUrl } from "../services/images";
+import imageService from "services/images";
 
 export default function KeywordResult({ results } = {}) {
   if (results?.length === 0 || !results) {
@@ -27,7 +27,7 @@ export default function KeywordResult({ results } = {}) {
             }}
             as="a"
           >
-            <Avatar src={imageUrl.poster_sizes.w185(poster_path)} squared />
+            <Avatar src={imageService.poster.w185(poster_path)} squared />
             <Spacer />
             <Text
               h6
