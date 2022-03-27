@@ -1,9 +1,15 @@
 import LinkNext from "next/link";
 import { Button, Text, Avatar, Spacer } from "@nextui-org/react";
-
+//utils
 import imageService from "services/images";
+//types
+import { Result } from "services/movies/search/types";
 
-export default function KeywordResult({ results } = {}) {
+interface Props {
+  results: Result[];
+}
+
+export default function KeywordResult({ results }: Props) {
   if (results?.length === 0 || !results) {
     return (
       <Button disabled css={{ bg: "$accents1" }}>

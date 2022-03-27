@@ -1,20 +1,25 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useRouter } from "next/router";
 import { Button, Input, Spacer, Loading, Tooltip } from "@nextui-org/react";
 import { Search, CloseSquare } from "react-iconly";
 
-import { useMovieSearch } from "../hooks/useMovieSearch";
-import { useResponsive } from "../hooks/useResponsive";
-
-import KeywordResult from "./KeywordResults";
-import { debounce } from "../utils/debounce";
+//components
+import KeywordResult from "components/KeywordResults";
+//utils
+import { useMovieSearch } from "hooks/useMovieSearch";
+import { useResponsive } from "hooks/useResponsive";
+import { debounce } from "utils/debounce";
+//types
+interface Props {
+  label?: string;
+}
 
 const breakpoint = 500;
 
-export default function SearchInput({ label = "Search movie" } = {}) {
-  const [inputShowed, setInputShowed] = useState(false);
-  const [keyword, setKeyword] = useState("");
-  const inputRef = useRef();
+export default function SearchInput({ label = "Search movie" }: Props = {}) {
+  const [inputShowed, setInputShowed] = useState<boolean>(false);
+  const [keyword, setKeyword] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
   const { widthScreen } = useResponsive();
@@ -31,15 +36,16 @@ export default function SearchInput({ label = "Search movie" } = {}) {
   }, [router.asPath]);
 
   // show the searcher and close if the input is empty
-  const handleClick = (event) => {
-    const keyword = event.target.value || "";
+  const handleClick = () => {
     if (keyword.length !== 0) return;
     setInputShowed(!inputShowed);
   };
 
-  const handleChange = (event) => {
-    const value = event.target.value || "";
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target;
+    const value = input.value || "";
     setKeyword(value);
+    if (value.trim().length === 0) return (input.value = "");
     search({ keyword: value });
   };
 
@@ -52,7 +58,7 @@ export default function SearchInput({ label = "Search movie" } = {}) {
       <div className="input-container">
         <div className={showInputInMobile ? "input-mobile" : ""}>
           <Tooltip
-            trigger=""
+            trigger="" // no trigger
             visible={keyword.length !== 0}
             placement="bottom"
             content={<KeywordResult results={results} />}
