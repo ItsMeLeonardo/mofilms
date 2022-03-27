@@ -6,16 +6,16 @@ import { Star } from "react-iconly";
 import BtnToSeeTrailer from "./BtnToSeeTrailer";
 
 import { useResponsive } from "../../hooks/useResponsive";
-import { imageUrl } from "../../services/images";
+import imageService from 'services/images'
 
 const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
 
 function MovieCard({
-  id,
+  id = '',
   title = "",
   rate = 0,
   badge = null,
-  poster,
+  poster = '',
   date = "",
   backdropImg = "",
   cols = 3,
@@ -30,8 +30,8 @@ function MovieCard({
   };
 
   const isRectangle = cols > 4;
-  const posterUrl = imageUrl.poster_sizes.w185(poster);
-  const backdropUrl = imageUrl.backdrop_sizes.w300(backdropImg);
+  const posterUrl = imageService.poster.w185(poster)
+  const backdropUrl = imageService.backdrop.w300(backdropImg)
   return (
     <>
       <Grid

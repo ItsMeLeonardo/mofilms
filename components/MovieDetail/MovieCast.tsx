@@ -4,7 +4,8 @@ import { Heart2 } from "react-iconly";
 
 import { useNearScreen } from "../../hooks/useNearScreen";
 import movieService from "../../services/movies";
-import { imageUrl } from "../../services/images";
+
+import imageService from "services/images";
 
 export default function MovieCast({ id }) {
   const [castData, setCastData] = useState(null);
@@ -43,7 +44,7 @@ export default function MovieCast({ id }) {
                         squared
                         bordered
                         color="gradient"
-                        src={imageUrl.profile_sizes.w185(profile_path)}
+                        src={imageService.profile.w185(profile_path)}
                       />
                       <Col>
                         <Text color="primary" weight="bold">

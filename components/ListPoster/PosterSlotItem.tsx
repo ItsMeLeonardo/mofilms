@@ -1,7 +1,7 @@
 import { Card, Text } from "@nextui-org/react";
 import { Show } from "react-iconly";
 
-import { imageUrl } from "../../services/images";
+import imageService from "services/images";
 
 const cardSelectedCss = {
   "&::before": {
@@ -60,7 +60,7 @@ export default function PosterSlotItem({ movie, isSelected }) {
       >
         {isSelected && CardSelectedIcon()}
         <Card.Image
-          src={imageUrl.poster_sizes.w185(movie.poster_path)}
+          src={imageService.poster.w185(movie.poster_path)}
           color="gradient"
           objectFit="cover"
           width="100%"

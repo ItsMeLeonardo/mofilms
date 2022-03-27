@@ -1,7 +1,7 @@
 import { Grid, Row, Card, Button } from "@nextui-org/react";
 import { Heart2, Plus, Play } from "react-iconly";
 
-import { imageUrl } from "../../services/images";
+import imageService from "services/images";
 
 export default function MovieOptions({ poster_path }) {
   return (
@@ -12,7 +12,7 @@ export default function MovieOptions({ poster_path }) {
           css={{ flexDirection: "column", gap: "1rem", maxW: "320px" }}
         >
           <Card.Image
-            src={imageUrl.poster_sizes.w185(poster_path)}
+            src={imageService.poster.w185(poster_path)}
             width="100%"
             height="180px"
           />
