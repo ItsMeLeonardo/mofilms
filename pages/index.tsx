@@ -7,8 +7,15 @@ import MostPopular from "components/MostPopular";
 import Trending from "components/Trending";
 
 import movieService from "services/movies";
+import { Result as TopResults } from "services/movies/top/types";
+import { Result as TrendingResults } from "services/movies/trending/types";
 
-export default function Home({ topMovies, trending }) {
+interface Props {
+  topMovies: TopResults;
+  trending: TrendingResults;
+}
+
+export default function Home({ topMovies, trending }: Props) {
   return (
     <>
       <div>

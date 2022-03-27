@@ -1,9 +1,9 @@
 import { Text } from "@nextui-org/react";
 
-import HorizontalList from "../HorizontalList";
-import MovieCard from "../MovieCard";
+import HorizontalList from "components/HorizontalList";
+import MovieCard from "components/MovieCard";
 
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "utils/formatDate";
 
 export default function MostPopular({ movies = [] } = {}) {
   return (

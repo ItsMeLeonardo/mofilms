@@ -1,6 +1,6 @@
 import { Spacer } from "@nextui-org/react";
 
-import HorizontalList from "../../components/HorizontalList";
+import HorizontalList from "../HorizontalList";
 import ActorCard from "./ActorCard";
 
 export default function PopularActors({ actors = [] } = {}) {
