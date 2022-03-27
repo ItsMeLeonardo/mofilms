@@ -1,9 +1,9 @@
-import { ReactChildren } from "react";
+import { ReactNode } from "react";
 import { Grid } from "@nextui-org/react";
 
 //types
 interface Props {
-  children: ReactChildren;
+  children: ReactNode;
   gap?: number;
 }
 

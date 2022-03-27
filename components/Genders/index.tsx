@@ -1,7 +1,18 @@
-import HorizontalList from "../HorizontalList";
+//components
+import HorizontalList from "components/HorizontalList";
 import GenderAnchor from "./GenderAnchor";
 
-export default function Genders({ currentGender, genders }) {
+//types
+interface Props {
+  currentGender: string;
+  genders: Genders[];
+}
+interface Genders {
+  id: number | string;
+  name: string;
+}
+
+export default function Genders({ currentGender, genders }: Props) {
   return (
     <HorizontalList gap={2}>
       {genders.map(({ id, name }) => {

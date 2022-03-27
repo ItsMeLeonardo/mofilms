@@ -2,7 +2,14 @@ import { memo } from "react";
 import LinkNext from "next/link";
 import { Button, Grid } from "@nextui-org/react";
 
-function GenderAnchor({ route, isInThisRoute, label }) {
+//types
+interface Props {
+  route: string;
+  isInThisRoute: boolean;
+  label: string;
+}
+
+function GenderAnchor({ route, isInThisRoute, label }: Props) {
   return (
     <Grid>
       <LinkNext href={route}>
