@@ -1,30 +1,39 @@
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
+//utils
+import movieService from "services/movies";
+//types
+interface Props {
+  movieId: string | number;
+  onClose?: () => void;
+}
 
-import movieService from "../services/movies";
-
-export default function VideoCard({ movieId, onClose = () => {} } = {}) {
+export default function VideoCard(
+  { movieId, onClose = () => {} }: Props = { movieId: "0" }
+) {
   const [showCard, setShowCard] = useState(true);
-  const [videoId, setVideoId] = useState(null);
+  const [videoId, setVideoId] = useState<string>(null);
 
   useEffect(() => {
     // Drag the video card
-    const moveBar = document.querySelector("#moveBar");
-    const videoContainer = document.querySelector("#videoCardContainer");
+    const moveBar = document.querySelector<HTMLDivElement>("#moveBar");
+    const videoContainer = document.querySelector<HTMLSelectElement>(
+      "#videoCardContainer"
+    );
 
-    const moveCard = (event) => {
+    const moveCard = (event: MouseEvent) => {
       event.stopPropagation();
       let shiftX = event.clientX - moveBar.getBoundingClientRect().left;
       // let shiftY = event.clientY - moveBar.getBoundingClientRect().top;
 
-      function moveAt(pageX, pageY) {
+      function moveAt(pageX: number, pageY: number) {
         videoContainer.style.left = `${pageX - shiftX}px`;
         // videoContainer.style.top = `${pageY - shiftY}px`;
       }
 
       moveAt(event.pageX, event.pageY);
 
-      function onMouseMove(event) {
+      function onMouseMove(event: MouseEvent) {
         moveAt(event.pageX, event.pageY);
       }
 
@@ -43,7 +52,7 @@ export default function VideoCard({ movieId, onClose = () => {} } = {}) {
   }, []);
 
   useEffect(() => {
-    movieService.video(movieId).then((video) => {
+    movieService.video(movieId.toString()).then((video) => {
       setVideoId(video.key);
     });
   }, []);
