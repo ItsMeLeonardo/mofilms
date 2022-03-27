@@ -8,7 +8,7 @@ import { formatDate } from "utils/formatDate";
 //types
 import { Props } from "./types";
 
-export default function MostPopular({ movies = [] }: Props = {}) {
+export default function MostPopular({ movies }: Props = { movies: [] }) {
   return (
     <>
       <h1>Most popular</h1>

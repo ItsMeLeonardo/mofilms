@@ -22,9 +22,9 @@ function MovieCard({
   poster,
   date,
   backdrop,
-  cols,
-  h,
-  className,
+  cols = 3,
+  h = 400,
+  className = "",
 }: MovieCardProps = defaultProps) {
   const router = useRouter();
   const { widthScreen, currentScreen } = useResponsive();
