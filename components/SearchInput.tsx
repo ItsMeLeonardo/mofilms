@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, Input, Spacer, Loading, Tooltip } from "@nextui-org/react";
 import { Search, CloseSquare } from "react-iconly";
 
-import { useSearch } from "../hooks/useSearch";
+import { useMovieSearch } from "../hooks/useMovieSearch";
 import { useResponsive } from "../hooks/useResponsive";
 
 import KeywordResult from "./KeywordResults";
@@ -19,7 +19,7 @@ export default function SearchInput({ label = "Search movie" } = {}) {
   const router = useRouter();
   const { widthScreen } = useResponsive();
 
-  const { isLoading, data: results, search } = useSearch("movie");
+  const { isLoading, data: results, search } = useMovieSearch();
 
   useEffect(() => {
     // reset values when changing route

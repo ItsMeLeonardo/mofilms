@@ -2,14 +2,14 @@ import { Row, Spacer, Text, Grid, Input } from "@nextui-org/react";
 import Head from "next/head";
 import { Search } from "react-iconly";
 
-import PopularActors from "../../components/Actor/PopularActors";
-import ActorCard from "../../components/Actor/ActorCard";
-import { debounce } from "../../utils/debounce";
-import { useSearch } from "../../hooks/useSearch";
-import actorService from "../../services/actors";
+import PopularActors from "components/Actor/PopularActors";
+import ActorCard from "components/Actor/ActorCard";
+import { debounce } from "utils/debounce";
+import { useActorSearch } from "hooks/useActorSearch";
+import actorService from "services/actors";
 
 export default function Actors({ popularActors = [] } = {}) {
-  const { data: actors, search, isLoading } = useSearch("actor");
+  const { data: actors, search, isLoading } = useActorSearch();
 
   const handleChange = (event) => {
     const keyword = event.target.value;
