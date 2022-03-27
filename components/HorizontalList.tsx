@@ -1,5 +1,15 @@
+import { ReactChildren } from "react";
 import { Grid } from "@nextui-org/react";
-export default function HorizontalList({ children, gap = 2 } = {}) {
+
+//types
+interface Props {
+  children: ReactChildren;
+  gap?: number;
+}
+
+export default function HorizontalList(
+  { children, gap = 2 }: Props = { children: null }
+) {
   return (
     <>
       <div className="container">
