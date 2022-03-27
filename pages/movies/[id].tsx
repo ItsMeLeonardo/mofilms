@@ -3,16 +3,16 @@ import Head from "next/head";
 
 import { Text, Grid } from "@nextui-org/react";
 
-import DetailPoster from "../../components/DetailPoster";
-import MovieList from "../../components/MovieList";
-import MovieCast from "../../components/MovieDetail/MovieCast";
-import MovieData from "../../components/MovieDetail/MovieData";
-import MovieOptions from "../../components/MovieDetail/MovieOptions";
+import DetailPoster from "components/DetailPoster";
+import MovieList from "components/MovieList";
+import MovieCast from "components/MovieDetail/MovieCast";
+import MovieData from "components/MovieDetail/MovieData";
+import MovieOptions from "components/MovieDetail/MovieOptions";
 
 import imageService from "services/images";
-import movieService from "../../services/movies";
+import movieService from "services/movies";
 
-import { useNearScreen } from "../../hooks/useNearScreen";
+import { useNearScreen } from "hooks/useNearScreen";
 
 export default function MovieDetails({ movie = null } = {}) {
   const [similarMovies, setSimilarMovies] = useState(null);

@@ -50,7 +50,7 @@ export default function Actors({ popularActors = [] } = {}) {
 
         <Grid.Container
           gap={1}
-          align="center"
+          alignItems="center"
           justify="center"
           css={{ w: "100%" }}
         >

@@ -1,10 +1,12 @@
+import { GetServerSideProps } from "next";
+
 import Head from "next/head";
 import { Spacer } from "@nextui-org/react";
 
-import MostPopular from "../components/MostPopular";
-import Trending from "../components/Trending";
+import MostPopular from "components/MostPopular";
+import Trending from "components/Trending";
 
-import movieService from "../services/movies";
+import movieService from "services/movies";
 
 export default function Home({ topMovies, trending }) {
   return (
@@ -24,7 +26,7 @@ export default function Home({ topMovies, trending }) {
   );
 }
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   const { results: topMovies } = await movieService.topMovies();
   const { results: trending } = await movieService.trending();
 
@@ -34,4 +36,4 @@ export async function getServerSideProps() {
       trending,
     },
   };
-}
+};

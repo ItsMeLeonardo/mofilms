@@ -1,7 +1,7 @@
 import Head from "next/head";
 
-import ListPoster from "../../components/ListPoster";
-import movieService from "../../services/movies";
+import ListPoster from "components/ListPoster";
+import movieService from "services/movies";
 
 export default function Movies({ popular }) {
   return (
