@@ -28,7 +28,6 @@ function MovieCard({
 }: MovieCardProps = defaultProps) {
   const router = useRouter();
   const { widthScreen, currentScreen } = useResponsive();
-
   const handleClick = () => {
     router.push(`/movies/${id}`);
   };
