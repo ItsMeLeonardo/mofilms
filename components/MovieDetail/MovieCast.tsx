@@ -48,7 +48,7 @@ export default function MovieCast({ id }: MovieCardProps) {
                         squared
                         bordered
                         color="gradient"
-                        src={imageService.profile.w185(profile_path)}
+                        src={imageService.profile.w45(profile_path)}
                       />
                       <Col>
                         <Text color="primary" weight="bold">

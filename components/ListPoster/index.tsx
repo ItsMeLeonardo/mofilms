@@ -4,7 +4,7 @@ import { Text } from "@nextui-org/react";
 import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
 // utils
-import imageService from "services/images";
+import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
 import { Result as PopularResult } from "services/movies/popular/types";
 import { ListPosterProps } from "./types";
@@ -27,7 +27,10 @@ export default function ListPoster(
   { movies = [], overlayPosition = "left" }: ListPosterProps = { movies: [] }
 ) {
   const [movieToShow, setMovieToShow] = useState<PopularResult>(movies.at(0));
-  const poster = imageService.backdrop.w300(movieToShow.backdrop_path);
+  const { imageUrl: poster } = useResponsiveImage(
+    movieToShow.backdrop_path,
+    "backdrop"
+  );
 
   return (
     <>

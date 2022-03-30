@@ -1,9 +1,9 @@
 import { useNetworkState } from "./useNetworkState";
 import actorService from "services/actors";
-import { Result } from "services/actors/search/types";
+import { GenericActor } from "services/actors/types";
 
 export const useActorSearch = () => {
-  const { data, meta, actions } = useNetworkState<Result[]>();
+  const { data, meta, actions } = useNetworkState<GenericActor[]>();
   const { isLoading, error } = meta;
 
   const search = async ({ keyword }) => {
