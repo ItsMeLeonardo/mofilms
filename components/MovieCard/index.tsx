@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useRouter } from "next/router";
-import { Grid, Card, Col, Text, Row } from "@nextui-org/react";
+import { Grid, Card, Col, Text, Row, CSS } from "@nextui-org/react";
 import { Star } from "react-iconly";
 
 // components
@@ -12,7 +12,29 @@ import imageService from "services/images";
 import { MovieCardProps, defaultProps } from "./types";
 
 //nextUI css
-const overlayGradient = "linear-gradient(180deg, $gray900 -15%, transparent)";
+const cardHeaderCss: CSS = {
+  position: "absolute",
+  zIndex: 1,
+  top: 0,
+  background: "linear-gradient(180deg, $gray900 -15%, transparent)",
+};
+
+const cardFooterCss: CSS = {
+  position: "absolute",
+  bgBlur: "#0f1114",
+  borderRadius: ".75rem",
+  bottom: 0,
+  zIndex: 1,
+  p: "12px",
+};
+
+const cardMovieTitleCss = (isRectangle: boolean): CSS => ({
+  whiteSpace: "nowrap",
+  maxWidth: isRectangle ? "100%" : "16ch",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  color: "#FFF",
+});
 
 function MovieCard({
   id,
@@ -45,14 +67,7 @@ function MovieCard({
         className={className}
       >
         <Card hoverable clickable cover css={{ w: "100%" }}>
-          <Card.Header
-            css={{
-              position: "absolute",
-              zIndex: 1,
-              top: 0,
-              background: overlayGradient,
-            }}
-          >
+          <Card.Header css={cardHeaderCss}>
             <BtnToSeeTrailer movieId={id} />
             {badge && (
               <Row align="center" justify="flex-end">
@@ -68,30 +83,10 @@ function MovieCard({
               alt="Relaxing app background"
             />
           </Card.Body>
-          <Card.Footer
-            blur
-            css={{
-              position: "absolute",
-              bgBlur: "#0f1114",
-              borderRadius: ".75rem",
-              bottom: 0,
-              zIndex: 1,
-              p: "12px",
-            }}
-          >
+          <Card.Footer blur css={cardFooterCss}>
             <Row align="center">
               <Col>
-                <Text
-                  h2
-                  color="#FFF"
-                  size="1rem"
-                  css={{
-                    whiteSpace: "nowrap",
-                    maxWidth: isRectangle ? "100%" : "16ch",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                  }}
-                >
+                <Text h2 size="1rem" css={cardMovieTitleCss(isRectangle)}>
                   {title}
                 </Text>
                 <Text color="#d1d1d1" size={12}>

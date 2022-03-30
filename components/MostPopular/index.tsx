@@ -1,4 +1,4 @@
-import { Text } from "@nextui-org/react";
+import { Text, CSS } from "@nextui-org/react";
 
 //components
 import HorizontalList from "components/HorizontalList";
@@ -7,6 +7,8 @@ import MovieCard from "components/MovieCard";
 import { formatDate } from "utils/formatDate";
 //types
 import { Props } from "./types";
+//nextUI css
+const badgeTitleCss: CSS = { lineHeight: "1.25rem" };
 
 export default function MostPopular({ movies }: Props = { movies: [] }) {
   return (
@@ -24,11 +26,7 @@ export default function MostPopular({ movies }: Props = { movies: [] }) {
             backdrop={movie.backdrop_path}
             cols={index === 0 ? 6 : 3}
             badge={
-              <Text
-                size="1.25rem"
-                weight="bold"
-                css={{ lineHeight: "1.25rem" }}
-              >
+              <Text size="1.25rem" weight="bold" css={badgeTitleCss}>
                 {(index + 1).toString().padStart(2, "0")}
               </Text>
             }

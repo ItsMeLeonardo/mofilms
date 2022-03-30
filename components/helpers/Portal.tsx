@@ -1,9 +1,9 @@
-import { ReactChildren } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 //types
 interface Props {
-  children: ReactChildren;
+  children: ReactNode;
 }
 
 export default function Portal({ children }: Props) {

@@ -1,11 +1,11 @@
-import { Card, Text } from "@nextui-org/react";
+import { Card, Text, CSS } from "@nextui-org/react";
 import { Show } from "react-iconly";
 //utils
 import imageService from "services/images";
 //types
 import { PosterSlotItemProps } from "./types";
 //nextUI css
-const cardSelectedCss = {
+const cardSelectedCss: CSS = {
   "&::before": {
     content: "",
     position: "absolute",
@@ -17,7 +17,7 @@ const cardSelectedCss = {
   },
 };
 
-const movieCardCss = {
+const movieCardCss: CSS = {
   borderRadius: ".5rem",
   "& div": { borderRadius: ".5rem" },
   "&::after": {
@@ -29,19 +29,33 @@ const movieCardCss = {
   },
 };
 
+const cardSelectedIconCss: CSS = {
+  position: "absolute",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  zIndex: 10,
+};
+
+const cardSelectedFooterCss: CSS = {
+  position: "absolute",
+  bottom: 0,
+  zIndex: 2,
+};
+
+const cardMovieTitle: CSS = {
+  textShadow: "0 0 1rem rgba(0,0,0,.5)",
+  maxW: "15ch",
+  overflow: "hidden",
+  whiteSpace: " nowrap",
+  textOverflow: "ellipsis",
+};
+
 function CardSelectedIcon() {
   return (
-    <Card.Header
-      css={{
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 10,
-      }}
-    >
+    <Card.Header css={cardSelectedIconCss}>
       <Show size="large" />
     </Card.Header>
   );
@@ -72,17 +86,8 @@ export default function PosterSlotItem({
           height="10rem"
           css={{ ...(isSelected && { filter: "blur(.5rem)" }) }}
         />
-        <Card.Footer css={{ position: "absolute", bottom: 0, zIndex: 2 }}>
-          <Text
-            h6
-            css={{
-              textShadow: "0 0 1rem rgba(0,0,0,.5)",
-              maxW: "15ch",
-              overflow: "hidden",
-              whiteSpace: " nowrap",
-              textOverflow: "ellipsis",
-            }}
-          >
+        <Card.Footer css={cardSelectedFooterCss}>
+          <Text h6 css={cardMovieTitle}>
             {movie.title}
           </Text>
         </Card.Footer>
