@@ -6,8 +6,7 @@ import { Star } from "react-iconly";
 // components
 import BtnToSeeTrailer from "./BtnToSeeTrailer";
 // utils
-import { useResponsive } from "hooks/useResponsive";
-import imageService from "services/images";
+import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
 import { MovieCardProps, defaultProps } from "./types";
 
@@ -49,14 +48,14 @@ function MovieCard({
   className = "",
 }: MovieCardProps = defaultProps) {
   const router = useRouter();
-  const { widthScreen, currentScreen } = useResponsive();
+  const { imageUrl: posterUrl } = useResponsiveImage(poster, "poster");
+  const { imageUrl: backdropUrl } = useResponsiveImage(backdrop, "backdrop");
+
   const handleClick = () => {
     router.push(`/movies/${id}`);
   };
 
   const isRectangle = cols > 4;
-  const posterUrl = imageService.poster.w185(poster);
-  const backdropUrl = imageService.backdrop.w300(backdrop);
   return (
     <>
       <Grid
