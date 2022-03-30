@@ -7,6 +7,7 @@ import {
   Spacer,
   Grid,
   Card,
+  CSS,
 } from "@nextui-org/react";
 import { Send, Heart } from "react-iconly";
 
@@ -14,6 +15,13 @@ import { Send, Heart } from "react-iconly";
 import ImageService from "services/images";
 //types
 import { ActorInfoCardProps } from "./types";
+//nextUI css
+const columnCss: CSS = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
 export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
   const { profile_path, popularity } = actor;
 
@@ -24,7 +32,7 @@ export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
     <>
       <Col css={{ w: "12rem" }}>
         <Row justify="space-between" css={{ w: "100%" }}>
-          <Col align="center">
+          <Col css={columnCss}>
             <Text size={11}>Age</Text>
             <Text size={14} weight="bold">
               {age.toString()}
@@ -41,7 +49,7 @@ export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
             />
           </span>
           <Spacer />
-          <Col align="center">
+          <Col css={columnCss}>
             <Text size={11}>Popularity</Text>
             <Text size={14} weight="bold">
               {Math.round(popularity).toString()}

@@ -73,7 +73,8 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
       <div className="input-container">
         <div className={showInputInMobile ? "input-mobile" : ""}>
           <Tooltip
-            trigger=""
+            // @ts-ignore:next-line
+            trigger="" // to manually display the tooltip
             visible={keyword.length !== 0}
             placement="bottom"
             content={<KeywordResult results={results} />}
