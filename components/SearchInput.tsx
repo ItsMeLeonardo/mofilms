@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useRouter } from "next/router";
-import { Button, Input, Spacer, Loading, Tooltip } from "@nextui-org/react";
+import {
+  Button,
+  Input,
+  Spacer,
+  Loading,
+  Tooltip,
+  CSS,
+} from "@nextui-org/react";
 import { Search, CloseSquare } from "react-iconly";
 
 //components
@@ -13,6 +20,14 @@ import { debounce } from "utils/debounce";
 interface Props {
   label?: string;
 }
+//nextUI css
+const tooltipCss: CSS = {
+  maxH: "500px",
+  overflow: "auto",
+  "&::-webkit-scrollbar-thumb": {
+    bg: "$accents4",
+  },
+};
 
 const breakpoint = 500;
 
@@ -58,17 +73,11 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
       <div className="input-container">
         <div className={showInputInMobile ? "input-mobile" : ""}>
           <Tooltip
-            trigger="" // no trigger
+            trigger=""
             visible={keyword.length !== 0}
             placement="bottom"
             content={<KeywordResult results={results} />}
-            css={{
-              maxH: "500px",
-              overflow: "auto",
-              "&::-webkit-scrollbar-thumb": {
-                bg: "$accents4",
-              },
-            }}
+            css={tooltipCss}
           >
             <Input
               type="search"

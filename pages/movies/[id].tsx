@@ -10,10 +10,10 @@ import MovieCast from "components/MovieDetail/MovieCast";
 import MovieData from "components/MovieDetail/MovieData";
 import MovieOptions from "components/MovieDetail/MovieOptions";
 //utils
-import imageService from "services/images";
 import movieService from "services/movies";
 
 import { useNearScreen } from "hooks/useNearScreen";
+import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
 import { MovieDetailResponse } from "services/movies/details/types";
 import { Result as SimilarResult } from "services/movies/similar/types";
@@ -26,6 +26,10 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
   const [similarMovies, setSimilarMovies] = useState<SimilarResult[]>(null);
 
   const { elementRef: similarMoviesRef, isNearScreen } = useNearScreen();
+  const { imageUrl: poster } = useResponsiveImage(
+    movie.backdrop_path,
+    "backdrop"
+  );
 
   useEffect(() => {
     if (isNearScreen) {
@@ -50,7 +54,7 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
       <DetailPoster
         title={`${movie.title} (${new Date(movie.release_date).getFullYear()})`}
         overlayPosition="bottom"
-        poster={imageService.backdrop.w300(movie.backdrop_path)}
+        poster={poster}
       />
 
       <Grid.Container css={{ position: "relative", bottom: "10rem" }}>

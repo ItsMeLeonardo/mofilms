@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import YouTube from "react-youtube";
+import YouTube, { Options } from "react-youtube";
 //utils
 import movieService from "services/movies";
 //types
@@ -8,9 +8,16 @@ interface Props {
   onClose?: () => void;
 }
 
-export default function VideoCard(
-  { movieId, onClose = () => {} }: Props = { movieId: "0" }
-) {
+//react youtube
+const options: Options = {
+  playerVars: {
+    mute: 1,
+    modestbranding: 1,
+    autoplay: 1,
+  },
+};
+
+export default function VideoCard({ movieId, onClose = () => {} }: Props) {
   const [showCard, setShowCard] = useState(true);
   const [videoId, setVideoId] = useState<string>(null);
 
@@ -83,13 +90,7 @@ export default function VideoCard(
             videoId={videoId}
             id="cardVideo"
             className="video"
-            opts={{
-              playerVars: {
-                mute: 1,
-                modestbranding: 1,
-                autoplay: 1,
-              },
-            }}
+            opts={options}
             containerClassName="video-container"
           />
         ) : (

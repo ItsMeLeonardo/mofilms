@@ -1,21 +1,21 @@
-import { Text } from "@nextui-org/react";
+import { Text, CSS } from "@nextui-org/react";
 
 //types
 import { DetailPosterProps, defaultDetailPosterProps } from "./types";
 
 // nextUI css
+const titlePosterCss: CSS = {
+  textShadow: "0 .25rem 1rem rgba(0,0,0,.75)",
+  lineHeight: "1.15",
+  letterSpacing: "0",
+  "@md": { fontSize: "3rem", whiteSpace: "nowrap" },
+};
+
 const overlayPositionInDeg = {
   bottom: "180deg",
   top: "0deg",
   left: "270deg",
   right: "90deg",
-};
-
-const titlePosterCss = {
-  textShadow: "0 .25rem 1rem rgba(0,0,0,.75)",
-  lineHeight: "1.15",
-  letterSpacing: "0",
-  "@md": { fontSize: "3rem", whiteSpace: "nowrap" },
 };
 
 export default function DetailPoster({
