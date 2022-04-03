@@ -18,6 +18,7 @@ a {
 
 * {
   box-sizing: border-box;
+  user-select: none;
 }
 
 ::-webkit-scrollbar {
@@ -60,4 +61,37 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* ------ carousel ------*/
+.container-carousel {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  margin-bottom: 0.5rem;
+  overflow-x: clip;
+}
+.container-carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  width: 2.5rem;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #111);
+}
+.scroll-content-carousel {
+  width: max-content;
+  display: flex;
+  gap: 1.5rem;
+}
+.scroll-content-carousel * {
+  min-width: max-content;
+}
+
+@media (min-width: 600px) {
+  .container::after {
+    width: 5rem;
+  }
 }

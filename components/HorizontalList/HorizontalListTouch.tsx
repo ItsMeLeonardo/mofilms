@@ -7,7 +7,7 @@ interface Props {
   gap?: number;
 }
 
-export default function HorizontalList(
+export default function HorizontalListTouch(
   { children, gap = 2 }: Props = { children: null }
 ) {
   return (
@@ -23,7 +23,6 @@ export default function HorizontalList(
           </Grid.Container>
         </section>
       </div>
-
       <style jsx>{`
         .container {
           width: 100%;
