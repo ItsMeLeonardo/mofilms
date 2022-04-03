@@ -21,7 +21,6 @@ export default function MovieList({ movies }: Props = { movies: [] }) {
           })}
           rate={movie.vote_average}
           poster={movie.poster_path}
-          h={350}
           className="movieList-item"
         />
       ))}

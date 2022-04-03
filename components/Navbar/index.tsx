@@ -59,8 +59,6 @@ export default function Navbar() {
           className="navbar-links"
           xs={12}
           sm={7}
-          gap={2}
-          align="center"
           justify="flex-start"
           css={responsiveLinksContainerCss}
         >

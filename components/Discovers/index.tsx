@@ -56,7 +56,7 @@ export default function Discovers() {
   return (
     <>
       <h1>Discovers</h1>
-      <MovieList movies={data} />
+      {/* <MovieList movies={data} /> */}
       <style jsx>{``}</style>
     </>
   );
