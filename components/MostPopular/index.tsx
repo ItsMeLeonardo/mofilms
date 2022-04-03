@@ -10,7 +10,7 @@ import { Props } from "./types";
 //nextUI css
 const badgeTitleCss: CSS = { lineHeight: "1.25rem" };
 
-export default function MostPopular({ movies }: Props = { movies: [] }) {
+export default function MostPopular({ movies }: Props) {
   return (
     <>
       <h1>Most popular</h1>

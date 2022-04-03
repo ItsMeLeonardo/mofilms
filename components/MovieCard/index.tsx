@@ -25,6 +25,10 @@ const cardFooterCss: CSS = {
   bottom: 0,
   zIndex: 1,
   p: "12px",
+  cursor: "grab",
+  "&:active": {
+    cursor: "grabbing",
+  },
 };
 
 const cardMovieTitleCss = (isRectangle: boolean): CSS => ({
@@ -58,13 +62,7 @@ function MovieCard({
   const isRectangle = cols > 4;
   return (
     <>
-      <Grid
-        xs={12}
-        sm={3}
-        md={cols}
-        onClick={handleClick}
-        className={className}
-      >
+      <Grid xs={12} sm={3} md={cols} className={className}>
         <Card hoverable clickable cover css={{ w: "100%" }}>
           <Card.Header css={cardHeaderCss}>
             <BtnToSeeTrailer movieId={id} />
@@ -74,15 +72,19 @@ function MovieCard({
               </Row>
             )}
           </Card.Header>
-          <Card.Body>
+          <Card.Body onClick={handleClick}>
             <Card.Image
-              src={(isRectangle && backdropUrl) || posterUrl}
+              src={isRectangle ? backdropUrl : posterUrl}
               height={h}
               width="100%"
               alt="Relaxing app background"
             />
           </Card.Body>
-          <Card.Footer blur css={cardFooterCss}>
+          <Card.Footer
+            blur
+            css={cardFooterCss}
+            onClick={(e) => e.stopPropagation()}
+          >
             <Row align="center">
               <Col>
                 <Text h2 size="1rem" css={cardMovieTitleCss(isRectangle)}>
