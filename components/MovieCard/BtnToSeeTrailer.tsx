@@ -1,32 +1,24 @@
-import { useState, MouseEvent } from "react";
+import { MouseEvent } from "react";
 import { Tooltip } from "@nextui-org/react";
 import { Video } from "react-iconly";
-//components
-import VideoCard from "components/VideoCard";
-import Portal from "components/helpers/Portal";
+
+//utils
+import { useVideoId } from "hooks/useVideoId";
+
 //types
 interface Props {
   movieId: string | number;
 }
 
 export default function BtnToSeeTrailer({ movieId }: Props) {
-  const [trailerIsShowed, setTrailerIsShowed] = useState(false);
-
+  const { setVideoId } = useVideoId();
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    setTrailerIsShowed(true);
+    setVideoId(movieId.toString());
   };
 
   return (
     <>
-      {trailerIsShowed && (
-        <Portal>
-          <VideoCard
-            movieId={movieId}
-            onClose={() => setTrailerIsShowed(false)}
-          />
-        </Portal>
-      )}
       <Tooltip placement="right" content="see trailer">
         <button onClick={handleClick}>
           <Video />

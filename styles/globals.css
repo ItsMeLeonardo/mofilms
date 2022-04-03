@@ -1,5 +1,8 @@
 :root {
   --scroll-size: 0.5rem;
+
+  /* --- youtube vide --- */
+  --yt-card-radius: 0.75rem;
 }
 
 html,
@@ -56,6 +59,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 0 0 var(--yt-card-radius) var(--yt-card-radius);
+  overflow: hidden;
 }
 .video {
   width: 100%;

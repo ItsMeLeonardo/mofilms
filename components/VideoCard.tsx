@@ -62,7 +62,7 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
     movieService.video(movieId.toString()).then((video) => {
       setVideoId(video.key);
     });
-  }, []);
+  }, [movieId]);
 
   const closeCard = () => {
     setShowCard(false);
@@ -103,6 +103,7 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
       <style jsx>{`
         @import url("https://css.gg/close.css");
         @import url("https://css.gg/arrow-align-h.css");
+
         section {
           position: fixed;
           top: 80px;
@@ -112,8 +113,7 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
           max-width: 320px;
           aspect-ratio: 16/10;
           background: #333;
-          border-radius: 0.75rem;
-          overflow: hidden;
+          border-radius: var(--yt-card-radius);
           box-shadow: 0.5rem 1rem 1.5rem rgba(51, 51, 51, 0.5);
         }
         .move-bar {
@@ -127,17 +127,32 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
           max-height: 1.25rem;
         }
         .close-card {
-          height: 100%;
+          --size: 2rem;
+          width: var(--size);
+          height: var(--size);
+          right: -0.75rem;
+          top: -0.75rem;
           position: absolute;
-          right: 0.125rem;
           cursor: pointer;
           border: none;
-          background: transparent;
+          background: #333333;
           display: flex;
           align-items: center;
+          box-shadow: -7px 5px 11px #0000005e;
+          border-radius: calc(var(--yt-card-radius) / 2);
+        }
+        .close-card,
+        .gg-close {
+          transition: transform 0.35s ease-in-out;
+        }
+        .close-card:active {
+          transform: scale(0.9);
         }
         .close-card .gg-close {
           transform: scale(0.75);
+        }
+        .close-card:hover .gg-close {
+          transform: scale(0.9);
         }
       `}</style>
     </>
