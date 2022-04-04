@@ -1,24 +1,20 @@
-import { useNetworkState } from "./useNetworkState";
+import useSWR from "swr";
+
 import movieService from "services/movies";
-import { Result } from "services/movies/search/types";
 
-export const useMovieSearch = () => {
-  const { data, meta, actions } = useNetworkState<Result[]>();
-  const { isLoading, error } = meta;
+//types
+type Props = { keyword: string };
 
-  const search = async ({ keyword }) => {
-    try {
-      actions.startRequest();
-      const { results } = await movieService.search(keyword);
-      actions.setRequestData(results);
-      actions.endRequest();
-    } catch (err) {
-      actions.setError(err.message);
-      actions.endRequest();
-    } finally {
-      actions.endRequest();
-    }
+export const useMovieSearch = ({ keyword }: Props) => {
+  const isQueryValid = keyword.length >= 3;
+  const { data, error } = useSWR(
+    isQueryValid ? `movie/search/${keyword}` : null,
+    () => movieService.search(keyword)
+  );
+
+  return {
+    data,
+    error,
+    isLoading: !data && !error,
   };
-
-  return { data, search, isLoading, error };
 };

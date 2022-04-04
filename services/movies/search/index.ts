@@ -1,13 +1,10 @@
 import { movieApi } from "services/movieApi";
 import { MovieSearchResponse } from "./types";
 
-export const search = async (
-  keyword: string = ""
-): Promise<MovieSearchResponse> => {
+export const search = async (keyword: string): Promise<MovieSearchResponse> => {
   if (!keyword || keyword.trim().length === 0) {
     throw new Error("Keyword is required");
   }
-
   const params = {
     query: keyword,
   };
