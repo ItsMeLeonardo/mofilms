@@ -1,6 +1,7 @@
 import { GetServerSideProps } from "next";
 import { Spacer } from "@nextui-org/react";
 import Head from "next/head";
+import { SWRConfig } from "swr";
 
 //components
 import PopularActors from "components/Actor/PopularActors";
@@ -9,12 +10,14 @@ import ActorSearcher from "components/Actor/ActorSearcher";
 import actorService from "services/actors";
 
 //types
-import { GenericActor } from "services/actors/types";
+import { ActorPopularResponse } from "services/actors/popular/types";
+//swrKey
+import { swrActorPopularKey } from "components/Actor/PopularActors";
 export interface Props {
-  popularActors?: GenericActor[];
+  fallback: ActorPopularResponse;
 }
 
-export default function Actors({ popularActors = [] }: Props = {}) {
+export default function Actors({ fallback }: Props) {
   return (
     <>
       <Head>
@@ -25,7 +28,11 @@ export default function Actors({ popularActors = [] }: Props = {}) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PopularActors actors={popularActors} />
+
+      <SWRConfig value={{ fallback }}>
+        <PopularActors />
+      </SWRConfig>
+
       <Spacer />
       <ActorSearcher />
       <style jsx>{``}</style>
@@ -34,10 +41,12 @@ export default function Actors({ popularActors = [] }: Props = {}) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { results: popularActors } = await actorService.popular();
+  const data = await actorService.popular();
   return {
     props: {
-      popularActors,
+      fallback: {
+        [swrActorPopularKey]: data,
+      },
     },
   };
 };

@@ -14,7 +14,7 @@ import { Send, Heart } from "react-iconly";
 //utils
 import ImageService from "services/images";
 //types
-import { ActorInfoCardProps } from "./types";
+import { ActorInfoCardProps } from "components/Actor/types";
 //nextUI css
 const columnCss: CSS = {
   display: "flex",
@@ -22,6 +22,9 @@ const columnCss: CSS = {
   alignItems: "center",
 };
 
+/**
+ * @description: this is the tooltip of the card, if there are `movies` show the movies in the tooltip, otherwise * show the basic information
+ */
 export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
   const { profile_path, popularity } = actor;
 

@@ -5,6 +5,7 @@ import { Search } from "react-iconly";
 //components
 import ActorCard from "components/Actor/ActorCard";
 import ActorSearcherHeader from "./ActorSearcherHeader";
+import ActorCardListLoader from "components/Actor/ActorSearcher/loaders";
 //utils
 import { useActorSearch } from "hooks/useActorSearch";
 import { debounce } from "utils/debounce";
@@ -39,7 +40,7 @@ export default function ActorSearcher() {
         <Spacer />
 
         {isLoading ? (
-          <div>... loading</div>
+          <ActorCardListLoader length={10} />
         ) : (
           <Grid.Container
             gap={1}
