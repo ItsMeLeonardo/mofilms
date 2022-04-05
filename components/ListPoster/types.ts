@@ -1,7 +1,6 @@
 import { Result as PopularResult } from "services/movies/popular/types";
 
 export interface ListPosterProps {
-  movies: PopularResult[];
   overlayPosition?: "top" | "bottom" | "left" | "right";
 }
 

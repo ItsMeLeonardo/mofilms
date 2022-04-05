@@ -1,17 +1,24 @@
 import { GetServerSideProps } from "next";
 import Head from "next/head";
+import { SWRConfig } from "swr";
 // components
 import ListPoster from "components/ListPoster";
 //utils
 import movieService from "services/movies";
+
+//swrKey
+import { swrMoviePopularKey } from "components/ListPoster";
+
 //types
-import { Result as PopularResult } from "services/movies/popular/types";
+import { MoviePopularResponse } from "services/movies/popular/types";
 
 interface Props {
-  popular: PopularResult[];
+  fallback: {
+    [swrMoviePopularKey]: MoviePopularResponse;
+  };
 }
 
-export default function Movies({ popular }: Props) {
+export default function Movies({ fallback }: Props) {
   return (
     <>
       <Head>
@@ -19,12 +26,20 @@ export default function Movies({ popular }: Props) {
         <meta name="description" content="The most popular movies" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ListPoster movies={popular} />
+      <SWRConfig value={{ fallback }}>
+        <ListPoster />
+      </SWRConfig>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { results: popular } = await movieService.popular();
-  return { props: { popular } };
+  const movies = await movieService.popular();
+  return {
+    props: {
+      fallback: {
+        [swrMoviePopularKey]: movies,
+      },
+    },
+  };
 };

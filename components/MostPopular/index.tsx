@@ -11,7 +11,7 @@ import { MoviePopularResponse } from "services/movies/popular/types";
 const badgeTitleCss: CSS = { lineHeight: "1.25rem" };
 
 //swr key
-export const swrMoviePopularKey = "movies/popular";
+export const swrMoviePopularKey = "movies/topMovies";
 
 export default function MostPopular() {
   const { data } = useSWR<MoviePopularResponse>(swrMoviePopularKey);
