@@ -1,3 +1,5 @@
+import useSWR from "swr";
+
 // components
 import HorizontalList from "components/HorizontalList";
 import MovieCard from "components/MovieCard";
@@ -5,13 +7,19 @@ import MovieCard from "components/MovieCard";
 import { formatDate } from "utils/formatDate";
 import Badge from "./Badge";
 //types
-import { Result } from "services/movies/trending/types";
+import { MoviesTrendingResponse } from "services/movies/trending/types";
 
-interface Props {
-  movies: Result[];
-}
+export const swrMovieTrendingKey = "movies/trending";
 
-export default function TrendingMovies({ movies }: Props = { movies: [] }) {
+export default function TrendingMovies() {
+  const { data } = useSWR<MoviesTrendingResponse>(swrMovieTrendingKey);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  const movies = data.results;
+
   return (
     <>
       <h1>Trending</h1>

@@ -1,16 +1,27 @@
 import { Text, CSS } from "@nextui-org/react";
-
+import useSWR from "swr";
 //components
 import HorizontalList from "components/HorizontalList";
 import MovieCard from "components/MovieCard";
 //utils
 import { formatDate } from "utils/formatDate";
 //types
-import { Props } from "./types";
+import { MoviePopularResponse } from "services/movies/popular/types";
 //nextUI css
 const badgeTitleCss: CSS = { lineHeight: "1.25rem" };
 
-export default function MostPopular({ movies }: Props) {
+//swr key
+export const swrMoviePopularKey = "movies/popular";
+
+export default function MostPopular() {
+  const { data } = useSWR<MoviePopularResponse>(swrMoviePopularKey);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  const movies = data.results;
+
   return (
     <>
       <h1>Most popular</h1>
