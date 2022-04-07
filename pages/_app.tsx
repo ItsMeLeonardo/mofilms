@@ -1,7 +1,11 @@
 import { AppProps } from "next/app";
 import { NextUIProvider } from "@nextui-org/react";
 
+//components
 import Layout from "components/Layout";
+//utils
+import { useChangePage } from "hooks/useChangePage";
+
 import "styles/globals.css";
 
 import { createTheme } from "@nextui-org/react";
@@ -20,6 +24,7 @@ const darkTheme = createTheme({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useChangePage();
   return (
     <NextUIProvider theme={darkTheme}>
       <Layout>
