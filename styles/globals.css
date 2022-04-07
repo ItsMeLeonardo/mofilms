@@ -100,3 +100,13 @@ a {
     width: 5rem;
   }
 }
+
+/* ------ progress bar styles https://unpkg.com/nprogress@0.2.0/nprogress.css ------- */
+#nprogress .bar {
+  background: linear-gradient(
+    112deg,
+    #aaffec -63.59%,
+    #ff4ecd -20.3%,
+    #0070f3 70.46%
+  );
+}
