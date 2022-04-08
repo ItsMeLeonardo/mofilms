@@ -25,6 +25,10 @@ const cardTvCss: CSS = {
   cursor: "not-allowed",
 };
 
+//TODO: change this default image
+const defaultImage =
+  "https://images.unsplash.com/photo-1557682250-33bd709cbe85?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=829&q=80";
+
 export default function KnownForCard({ knownFor, index }: Props) {
   const router = useRouter();
 
@@ -39,9 +43,14 @@ export default function KnownForCard({ knownFor, index }: Props) {
     }
   };
 
+  const onImageError = (event) => {
+    event.currentTarget.src = defaultImage;
+  };
+
   return (
     <Grid key={id} xs={index == 0 ? 12 : 6}>
       <Card.Image
+        onError={onImageError}
         showSkeleton
         css={isMovie ? cardImageCss : cardTvCss}
         onClick={goToMovie}

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Text,
   Avatar,
@@ -14,6 +15,9 @@ import { Send, Heart } from "react-iconly";
 import KnownForCard from "./KnowForCard";
 import ImageService from "services/images";
 
+//utils
+import actorService from "services/actors";
+
 //types
 import { ActorInfoCardProps } from "./types";
 //nextUI css
@@ -24,10 +28,17 @@ const columnCss: CSS = {
 };
 
 export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
-  const { profile_path, popularity } = actor;
-  const photo = ImageService.profile.w185(profile_path);
+  const [age, setAge] = useState("");
+  const { profile_path, popularity, id } = actor;
 
-  const age = new Date().getFullYear() - new Date("03-25-2003").getFullYear();
+  useEffect(() => {
+    actorService.details(id.toString()).then(({ birthday }) => {
+      const age = new Date().getFullYear() - new Date(birthday).getFullYear();
+      setAge(age.toString());
+    });
+  }, []);
+
+  const photo = ImageService.profile.w185(profile_path);
 
   return (
     <>
@@ -58,14 +69,11 @@ export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
           </Col>
         </Row>
         {movies && (
-          <>
-            <Grid.Container gap={0.5}>
-              {movies.map((knownFor, i) => (
-                <KnownForCard key={knownFor.id} knownFor={knownFor} index={i} />
-              ))}
-            </Grid.Container>
-            <Spacer y={0.5} />
-          </>
+          <Grid.Container gap={0.5} css={{ mb: "1rem" }}>
+            {movies.map((knownFor, i) => (
+              <KnownForCard key={knownFor.id} knownFor={knownFor} index={i} />
+            ))}
+          </Grid.Container>
         )}
         <Row justify="space-between">
           <Button
