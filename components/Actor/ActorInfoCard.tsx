@@ -6,13 +6,14 @@ import {
   Button,
   Spacer,
   Grid,
-  Card,
   CSS,
 } from "@nextui-org/react";
 import { Send, Heart } from "react-iconly";
 
-//utils
+//components
+import KnownForCard from "./KnowForCard";
 import ImageService from "services/images";
+
 //types
 import { ActorInfoCardProps } from "./types";
 //nextUI css
@@ -24,10 +25,10 @@ const columnCss: CSS = {
 
 export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
   const { profile_path, popularity } = actor;
-
   const photo = ImageService.profile.w185(profile_path);
 
   const age = new Date().getFullYear() - new Date("03-25-2003").getFullYear();
+
   return (
     <>
       <Col css={{ w: "12rem" }}>
@@ -59,16 +60,8 @@ export default function ActorInfoCard({ actor, movies }: ActorInfoCardProps) {
         {movies && (
           <>
             <Grid.Container gap={0.5}>
-              {movies.map(({ id, backdrop_path, title }, index) => (
-                <Grid key={id} xs={index == 0 ? 12 : 6}>
-                  <Card.Image
-                    width="100%"
-                    height={80}
-                    objectFit="cover"
-                    src={ImageService.backdrop.w300(backdrop_path)}
-                    alt={title}
-                  />
-                </Grid>
+              {movies.map((knownFor, i) => (
+                <KnownForCard key={knownFor.id} knownFor={knownFor} index={i} />
               ))}
             </Grid.Container>
             <Spacer y={0.5} />
