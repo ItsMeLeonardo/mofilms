@@ -7,14 +7,14 @@ import ListPoster from "components/ListPoster";
 import movieService from "services/movies";
 
 //swrKey
-import { swrMoviePopularKey } from "components/ListPoster";
+import { SWR_MOVIE_POPULAR_KEY } from "components/ListPoster";
 
 //types
 import { MoviePopularResponse } from "services/movies/popular/types";
 
 interface Props {
   fallback: {
-    [swrMoviePopularKey]: MoviePopularResponse;
+    [SWR_MOVIE_POPULAR_KEY]: MoviePopularResponse;
   };
 }
 
@@ -38,7 +38,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   return {
     props: {
       fallback: {
-        [swrMoviePopularKey]: movies,
+        [SWR_MOVIE_POPULAR_KEY]: movies,
       },
     },
   };

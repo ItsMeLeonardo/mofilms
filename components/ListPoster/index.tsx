@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Text } from "@nextui-org/react";
 import useSWR from "swr";
+
 //components
 import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
+import ListPosterLoader from "./loaders";
 // utils
 import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
@@ -27,22 +29,22 @@ const titlePosterCss = {
   "@md": { fontSize: "3rem", whiteSpace: "nowrap" },
 };
 //swr key
-export const swrMoviePopularKey = "movies/popular";
+export const SWR_MOVIE_POPULAR_KEY = "movies/popular";
 
 export default function ListPoster({
   overlayPosition = "left",
 }: ListPosterProps = {}) {
-  const { data } = useSWR<MoviePopularResponse>(swrMoviePopularKey);
+  const { data } = useSWR<MoviePopularResponse>(SWR_MOVIE_POPULAR_KEY);
 
   const movies = data?.results;
   const [movieToShow, setMovieToShow] = useState<PopularResult>(movies?.at(0));
-
   const { imageUrl: poster } = useResponsiveImage(
     movieToShow?.backdrop_path,
     "backdrop"
   );
-  if (!movies) {
-    return <div>Loading...</div>;
+  const isLoading = !movies && !movieToShow;
+  if (isLoading) {
+    return <ListPosterLoader />;
   }
 
   return (
@@ -54,11 +56,11 @@ export default function ListPoster({
           </Text>
 
           <PosterData
-            id={movieToShow?.id}
-            votes={movieToShow?.vote_count}
-            rate={movieToShow?.vote_average}
-            releaseDate={movieToShow?.release_date}
-            overview={movieToShow?.overview}
+            id={movieToShow.id}
+            votes={movieToShow.vote_count}
+            rate={movieToShow.vote_average}
+            releaseDate={movieToShow.release_date}
+            overview={movieToShow.overview}
           />
         </div>
         <PosterSlot
