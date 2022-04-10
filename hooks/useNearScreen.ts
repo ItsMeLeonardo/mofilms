@@ -20,6 +20,10 @@ export const useNearScreen = ({
       ? externalRef.current
       : elementRef.current;
 
+    const hasIOSupport = !!window.IntersectionObserver;
+
+    if (!hasIOSupport || !elementToObserver) return;
+
     const onChange: IntersectionObserverCallback = (elements, observer) => {
       const [element] = elements;
       if (element.isIntersecting) {
@@ -34,12 +38,10 @@ export const useNearScreen = ({
       rootMargin: `${distance}`,
     });
 
-    if (elementToObserver) {
-      observer.observe(elementToObserver);
-    }
+    observer.observe(elementToObserver);
 
     return () => observer.disconnect();
-  });
+  }, [distance, externalRef, once]);
 
   return { isNearScreen, elementRef };
 };

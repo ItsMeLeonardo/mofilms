@@ -1,12 +1,11 @@
 import LinkNext from "next/link";
-import { Button, Text, Avatar, Spacer, CSS } from "@nextui-org/react";
+import { Button, Text, Avatar, Spacer, Loading, CSS } from "@nextui-org/react";
 //utils
 import imageService from "services/images";
-//types
-import { Result } from "services/movies/search/types";
+import { useMovieSearch } from "hooks/useMovieSearch";
 
 interface Props {
-  results: Result[];
+  keyword: string;
 }
 
 //nextui css
@@ -24,15 +23,33 @@ const resultTextCss: CSS = {
   textOverflow: "ellipsis",
 };
 
-export default function KeywordResult({ results }: Props) {
+function FallbackMessage({ message }: { message: string }) {
+  return (
+    <Button disabled css={{ bg: "$accents1" }}>
+      <Text h6 css={{ bg: "transparent" }}>
+        {message}
+      </Text>
+    </Button>
+  );
+}
+
+function FallbackLoading() {
+  return (
+    <Button disabled css={{ bg: "$accents1" }}>
+      <Loading type="points-opacity" color="white" size="sm" />
+    </Button>
+  );
+}
+
+export default function KeywordResult({ keyword }: Props) {
+  const { isLoading, data, error } = useMovieSearch({ keyword });
+
+  if (isLoading) return <FallbackLoading />;
+  if (error) return <FallbackMessage message={error.message} />;
+
+  const { results } = data;
   if (results?.length === 0 || !results) {
-    return (
-      <Button disabled css={{ bg: "$accents1" }}>
-        <Text h6 css={{ bg: "transparent" }}>
-          0 not results
-        </Text>
-      </Button>
-    );
+    return <FallbackMessage message={`No results for ${keyword}`} />;
   }
 
   return (

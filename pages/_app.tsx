@@ -1,5 +1,6 @@
 import { AppProps } from "next/app";
-import { NextUIProvider } from "@nextui-org/react";
+import { NextUIProvider, createTheme } from "@nextui-org/react";
+import { SWRConfig, SWRConfiguration } from "swr";
 
 //components
 import Layout from "components/Layout";
@@ -8,8 +9,7 @@ import { useChangePage } from "hooks/useChangePage";
 
 import "styles/globals.css";
 
-import { createTheme } from "@nextui-org/react";
-
+//nextUI theme
 const darkTheme = createTheme({
   type: "dark",
   theme: {
@@ -23,13 +23,20 @@ const darkTheme = createTheme({
   },
 });
 
+//swr config
+const config: SWRConfiguration = {
+  revalidateOnFocus: false,
+};
+
 function MyApp({ Component, pageProps }: AppProps) {
   useChangePage();
   return (
     <NextUIProvider theme={darkTheme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <SWRConfig value={config}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </SWRConfig>
     </NextUIProvider>
   );
 }

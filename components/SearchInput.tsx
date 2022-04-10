@@ -1,19 +1,11 @@
 import { useState, useEffect, useRef, ChangeEvent } from "react";
 import { useRouter } from "next/router";
-import {
-  Button,
-  Input,
-  Spacer,
-  Loading,
-  Tooltip,
-  CSS,
-} from "@nextui-org/react";
+import { Button, Input, Spacer, Tooltip, CSS } from "@nextui-org/react";
 import { Search, CloseSquare } from "react-iconly";
 
 //components
 import KeywordResult from "components/KeywordResults";
 //utils
-import { useMovieSearch } from "hooks/useMovieSearch";
 import { useResponsive } from "hooks/useResponsive";
 import { debounce } from "utils/debounce";
 //types
@@ -39,8 +31,6 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
   const router = useRouter();
   const { widthScreen } = useResponsive();
 
-  const { isLoading, data: results, search } = useMovieSearch();
-
   useEffect(() => {
     // reset values when changing route
     setKeyword("");
@@ -61,7 +51,6 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
     const value = input.value || "";
     setKeyword(value);
     if (value.trim().length === 0) return (input.value = "");
-    search({ keyword: value });
   };
 
   const debouncedHandleChange = debounce(handleChange, 500);
@@ -77,18 +66,16 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
             trigger="" // to manually display the tooltip
             visible={keyword.length !== 0}
             placement="bottom"
-            content={<KeywordResult results={results} />}
+            content={<KeywordResult keyword={keyword.trim()} />}
             css={tooltipCss}
           >
             <Input
               type="search"
-              className="input uwu"
               placeholder={label}
               onChange={debouncedHandleChange}
               hidden={!inputShowed}
               bordered={inputShowed}
               color="error"
-              name="keyword"
               id="SearchInput"
               ref={inputRef}
               arial-label="Search"
@@ -114,11 +101,10 @@ export default function SearchInput({ label = "Search movie" }: Props = {}) {
           auto
           css={{ aspectRatio: "1/1" }}
           onClick={handleClick}
-          clickable={!isLoading}
           color="error"
         >
-          {isLoading ? (
-            <Loading color="white" size="sm" />
+          {inputShowed ? (
+            <CloseSquare />
           ) : (
             <Search size="small" stroke="bold" />
           )}

@@ -91,9 +91,6 @@ a {
   display: flex;
   gap: 1.5rem;
 }
-.scroll-content-carousel * {
-  min-width: max-content;
-}
 
 @media (min-width: 600px) {
   .container::after {

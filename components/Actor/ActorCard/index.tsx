@@ -1,11 +1,11 @@
 import { Tooltip, Text, Grid, Card, CSS } from "@nextui-org/react";
 //components
-import ActorInfoCard from "./ActorInfoCard";
+import ActorInfoCard from "components/Actor/ActorCard/ActorInfoCard";
 //utils
 import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
 import { KnownFor } from "services/actors/types/knowFor";
-import { ActorCardProps } from "./types";
+import { ActorCardProps } from "components/Actor/types";
 
 // nextUI css
 const cardBodyCss: CSS = {

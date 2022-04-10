@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Text } from "@nextui-org/react";
+import useSWR from "swr";
+
 //components
 import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
+import ListPosterLoader from "./loaders";
 // utils
 import { useResponsiveImage } from "hooks/useResponsiveImage";
 //types
-import { Result as PopularResult } from "services/movies/popular/types";
+import {
+  MoviePopularResponse,
+  Result as PopularResult,
+} from "services/movies/popular/types";
 import { ListPosterProps } from "./types";
 //nextUI css
 const overlayPositionInDeg = {
@@ -22,15 +28,24 @@ const titlePosterCss = {
   letterSpacing: "0",
   "@md": { fontSize: "3rem", whiteSpace: "nowrap" },
 };
+//swr key
+export const SWR_MOVIE_POPULAR_KEY = "movies/popular";
 
-export default function ListPoster(
-  { movies = [], overlayPosition = "left" }: ListPosterProps = { movies: [] }
-) {
-  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies.at(0));
+export default function ListPoster({
+  overlayPosition = "left",
+}: ListPosterProps = {}) {
+  const { data } = useSWR<MoviePopularResponse>(SWR_MOVIE_POPULAR_KEY);
+
+  const movies = data?.results;
+  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies?.at(0));
   const { imageUrl: poster } = useResponsiveImage(
-    movieToShow.backdrop_path,
+    movieToShow?.backdrop_path,
     "backdrop"
   );
+  const isLoading = !movies && !movieToShow;
+  if (isLoading) {
+    return <ListPosterLoader />;
+  }
 
   return (
     <>
@@ -41,11 +56,11 @@ export default function ListPoster(
           </Text>
 
           <PosterData
-            id={movieToShow?.id}
-            votes={movieToShow?.vote_count}
-            rate={movieToShow?.vote_average}
-            releaseDate={movieToShow?.release_date}
-            overview={movieToShow?.overview}
+            id={movieToShow.id}
+            votes={movieToShow.vote_count}
+            rate={movieToShow.vote_average}
+            releaseDate={movieToShow.release_date}
+            overview={movieToShow.overview}
           />
         </div>
         <PosterSlot
