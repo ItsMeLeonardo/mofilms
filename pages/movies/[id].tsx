@@ -25,9 +25,11 @@ interface MovieDetailProps {
 }
 
 export default function MovieDetails({ movie }: MovieDetailProps) {
-  const [similarMovies, setSimilarMovies] = useState<SimilarResult[]>(null);
+  const [recommendationMovies, setSimilarMovies] =
+    useState<SimilarResult[]>(null);
 
-  const { elementRef: similarMoviesRef, isNearScreen } = useNearScreen();
+  const { elementRef: recommendationsMoviesRef, isNearScreen } =
+    useNearScreen();
   const { imageUrl: poster } = useResponsiveImage(
     movie.backdrop_path,
     "backdrop"
@@ -68,17 +70,17 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
         <MovieCast id={movie.id} />
       </Grid.Container>
 
-      {/* Similar movies */}
-      <Text h3 weight="bold" size="2rem">
-        Similar movies
-      </Text>
-
-      <span ref={similarMoviesRef}>
-        {/* this is a flag to call the similar movies */}
+      <span ref={recommendationsMoviesRef}>
+        {/* this is a flag to call the recommendations movies */}
       </span>
 
-      {similarMovies ? (
-        <MovieList movies={similarMovies} />
+      {recommendationMovies ? (
+        <>
+          <Text h3 weight="bold" size="2rem">
+            Recommendations {`(${recommendationMovies.length})`}
+          </Text>
+          <MovieList movies={recommendationMovies} />
+        </>
       ) : (
         <MovieListLoader />
       )}
