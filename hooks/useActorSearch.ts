@@ -1,24 +1,18 @@
-import { useNetworkState } from "./useNetworkState";
+import useSWR from "swr";
+
 import actorService from "services/actors";
-import { GenericActor } from "services/actors/types";
 
-export const useActorSearch = () => {
-  const { data, meta, actions } = useNetworkState<GenericActor[]>();
-  const { isLoading, error } = meta;
+export const useActorSearch = ({ keyword }: { keyword: string }) => {
+  const keywordIsValid = keyword.length > 2;
 
-  const search = async ({ keyword }) => {
-    try {
-      actions.startRequest();
-      const { results } = await actorService.search(keyword);
-      actions.setRequestData(results);
-      actions.endRequest();
-    } catch (err) {
-      actions.setError(err.message);
-      actions.endRequest();
-    } finally {
-      actions.endRequest();
-    }
+  const { data, error, isValidating } = useSWR(
+    keywordIsValid ? `actor/search${keyword}` : null,
+    () => actorService.search(keyword)
+  );
+
+  return {
+    data,
+    error,
+    isLoading: isValidating,
   };
-
-  return { data, search, isLoading, error };
 };

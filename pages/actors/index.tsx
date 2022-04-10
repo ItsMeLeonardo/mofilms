@@ -1,33 +1,23 @@
-import { ChangeEvent } from "react";
 import { GetServerSideProps } from "next";
-import { Row, Spacer, Text, Grid, Input } from "@nextui-org/react";
+import { Spacer } from "@nextui-org/react";
 import Head from "next/head";
-import { Search } from "react-iconly";
+import { SWRConfig } from "swr";
 
 //components
 import PopularActors from "components/Actor/PopularActors";
-import ActorCard from "components/Actor/ActorCard";
+import ActorSearcher from "components/Actor/ActorSearcher";
 //utils
-import { debounce } from "utils/debounce";
 import actorService from "services/actors";
-import { useActorSearch } from "hooks/useActorSearch";
 
 //types
-import { GenericActor } from "services/actors/types";
+import { ActorPopularResponse } from "services/actors/popular/types";
+//swrKey
+import { swrActorPopularKey } from "components/Actor/PopularActors";
 export interface Props {
-  popularActors?: GenericActor[];
+  fallback: ActorPopularResponse;
 }
 
-export default function Actors({ popularActors = [] }: Props = {}) {
-  const { data: actors, search, isLoading } = useActorSearch();
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const keyword = event.target.value;
-    search({ keyword });
-  };
-
-  const debouncedHandleChange = debounce(handleChange, 600);
-
+export default function Actors({ fallback }: Props) {
   return (
     <>
       <Head>
@@ -38,49 +28,25 @@ export default function Actors({ popularActors = [] }: Props = {}) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PopularActors actors={popularActors} />
+
+      <SWRConfig value={{ fallback }}>
+        <PopularActors />
+      </SWRConfig>
+
       <Spacer />
-
-      <div>
-        <Text h2 css={{ textGradient: "$gradRed" }} weight="bold">
-          Search an Actor
-        </Text>
-
-        <Row align="center" justify="center">
-          <Input
-            type="search"
-            placeholder="Brad Pitt"
-            contentRight={<Search />}
-            fullWidth
-            onChange={debouncedHandleChange}
-            css={{ maxW: "400px" }}
-          />
-        </Row>
-        <Spacer />
-
-        <Grid.Container
-          gap={1}
-          alignItems="center"
-          justify="center"
-          css={{ w: "100%" }}
-        >
-          {isLoading && <div>loading</div>}
-          {actors &&
-            actors.map((actor) => (
-              <ActorCard key={actor.id} actor={actor} advancedData />
-            ))}
-        </Grid.Container>
-      </div>
+      <ActorSearcher />
       <style jsx>{``}</style>
     </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { results: popularActors } = await actorService.popular();
+  const data = await actorService.popular();
   return {
     props: {
-      popularActors,
+      fallback: {
+        [swrActorPopularKey]: data,
+      },
     },
   };
 };
