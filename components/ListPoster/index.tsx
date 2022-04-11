@@ -37,7 +37,7 @@ export default function ListPoster({
   const { data } = useSWR<MoviePopularResponse>(SWR_MOVIE_POPULAR_KEY);
 
   const movies = data?.results;
-  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies?.at(0));
+  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies[0] || null);
   const { imageUrl: poster } = useResponsiveImage(
     movieToShow?.backdrop_path,
     "backdrop"
