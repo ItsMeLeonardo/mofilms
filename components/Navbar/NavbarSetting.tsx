@@ -1,4 +1,5 @@
-import { Grid, Avatar, Tooltip, CSS } from "@nextui-org/react";
+import NextLink from "next/link";
+import { Grid, Avatar, Tooltip, Button, Spacer, CSS } from "@nextui-org/react";
 import { Notification } from "react-iconly";
 //components
 import SearchInput from "components/SearchInput";
@@ -18,23 +19,40 @@ export default function NavbarSetting() {
       justify="flex-end"
       alignItems="center"
     >
-      {/* SEARCHER */}
-      <Grid sm={8} alignItems="center" justify="flex-end">
-        <SearchInput label="What do we see today?" />
+      {/* Login and sign up */}
+      <Grid alignItems="center" justify="center">
+        <NextLink href="/login">
+          <Button as="a" auto light>
+            Login
+          </Button>
+        </NextLink>
       </Grid>
-
+      <Grid alignItems="center" justify="center">
+        <a
+          href="https://www.themoviedb.org/signup"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Button as="a" auto shadow color="gradient">
+            Register
+          </Button>
+        </a>
+      </Grid>
+      {/* SEARCHER */}
+      {/*     <Grid sm={8} alignItems="center" justify="flex-end">
+        <SearchInput label="What do we see today?" />
+      </Grid> */}
       {/* NOTIFICATION */}
-      <Grid sm={2} alignItems="center" justify="center">
+      {/*      <Grid sm={2} alignItems="center" justify="center">
         <Avatar
           squared
           icon={<Notification size="small" stroke="bold" primaryColor="#fff" />}
           css={{ cursor: "pointer" }}
         />
-      </Grid>
+      </Grid> */}
 
       {/* AVATAR */}
-      <Grid alignItems="center" justify="center">
-        {/* <ProfileOptions /> */}
+      {/*      <Grid alignItems="center" justify="center">
         <Tooltip
           content={<ProfileOptions />}
           placement="bottomEnd"
@@ -49,7 +67,7 @@ export default function NavbarSetting() {
             css={{ cursor: "pointer" }}
           />
         </Tooltip>
-      </Grid>
+      </Grid> */}
     </Grid.Container>
   );
 }
