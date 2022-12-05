@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import YouTube, { Options } from "react-youtube";
-//utils
+import { Loading, Text } from "@nextui-org/react";
+
 import movieService from "services/movies";
-//types
+
 interface Props {
   movieId: string | number;
   onClose?: () => void;
@@ -19,7 +20,10 @@ const options: Options = {
 
 export default function VideoCard({ movieId, onClose = () => {} }: Props) {
   const [showCard, setShowCard] = useState(true);
-  const [videoId, setVideoId] = useState<string>(null);
+  const [videoId, setVideoId] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState(!!videoId);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     // Drag the video card
@@ -59,10 +63,22 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
   }, []);
 
   useEffect(() => {
-    movieService.video(movieId.toString()).then((video) => {
-      setVideoId(video.key);
-    });
+    movieService
+      .video(movieId.toString())
+      .then((video) => {
+        setVideoId(video.key);
+      })
+      .catch(() => {
+        setError(true);
+      })
+      .finally(() => {
+        setLoading(true);
+      });
   }, [movieId]);
+
+  const handleLoadVideo = () => {
+    setLoading(false);
+  };
 
   const closeCard = () => {
     setShowCard(false);
@@ -85,17 +101,27 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
             <i className="gg-close"></i>
           </button>
         </div>
-        {videoId ? (
+        {videoId && !error && (
           <YouTube
             videoId={videoId}
             id="cardVideo"
             className="video"
             opts={options}
+            onError={() => setError(true)}
+            onReady={handleLoadVideo}
             containerClassName="video-container"
           />
-        ) : (
+        )}
+        {loading && !error && (
+          <div className="video-container-loader">
+            <Loading color="secondary" type="points" />
+          </div>
+        )}
+        {error && (
           <div className="video-container">
-            <h3>Video not available </h3>
+            <Text h4 weight="bold" color="error">
+              {"Sorry, we couldn't load the video"}
+            </Text>
           </div>
         )}
       </section>
