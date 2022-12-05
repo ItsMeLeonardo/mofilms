@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import YouTube, { Options } from "react-youtube";
 import { Loading, Text } from "@nextui-org/react";
 
+import Draggable from "react-draggable";
+
 import movieService from "services/movies";
 
 interface Props {
@@ -22,45 +24,8 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
   const [showCard, setShowCard] = useState(true);
   const [videoId, setVideoId] = useState<string | null>(null);
 
-  const [loading, setLoading] = useState(!!videoId);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
-  useEffect(() => {
-    // Drag the video card
-    const moveBar = document.querySelector<HTMLDivElement>("#moveBar");
-    const videoContainer = document.querySelector<HTMLSelectElement>(
-      "#videoCardContainer"
-    );
-
-    const moveCard = (event: MouseEvent) => {
-      event.stopPropagation();
-      let shiftX = event.clientX - moveBar.getBoundingClientRect().left;
-      // let shiftY = event.clientY - moveBar.getBoundingClientRect().top;
-
-      function moveAt(pageX: number, pageY: number) {
-        videoContainer.style.left = `${pageX - shiftX}px`;
-        // videoContainer.style.top = `${pageY - shiftY}px`;
-      }
-
-      moveAt(event.pageX, event.pageY);
-
-      function onMouseMove(event: MouseEvent) {
-        moveAt(event.pageX, event.pageY);
-      }
-
-      document.addEventListener("mousemove", onMouseMove);
-
-      moveBar.addEventListener("mouseup", () => {
-        document.removeEventListener("mousemove", onMouseMove);
-      });
-    };
-
-    moveBar.addEventListener("mousedown", moveCard);
-
-    return () => {
-      moveBar.removeEventListener("mousedown", moveCard);
-    };
-  }, []);
 
   useEffect(() => {
     movieService
@@ -91,40 +56,39 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
 
   return (
     <>
-      <section
-        id="videoCardContainer"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="move-bar" id="moveBar">
-          <i className="gg-arrow-align-h"></i>
-          <button className="close-card" onClick={closeCard}>
-            <i className="gg-close"></i>
-          </button>
-        </div>
-        {videoId && !error && (
-          <YouTube
-            videoId={videoId}
-            id="cardVideo"
-            className="video"
-            opts={options}
-            onError={() => setError(true)}
-            onReady={handleLoadVideo}
-            containerClassName="video-container"
-          />
-        )}
-        {loading && !error && (
-          <div className="video-container-loader">
-            <Loading color="secondary" type="points" />
+      <Draggable handle=".handle">
+        <section onClick={(event) => event.stopPropagation()}>
+          <div className="move-bar handle" id="handlerDragVideoCard">
+            <i className="gg-arrow-align-h"></i>
+            <button className="close-card" onClick={closeCard}>
+              <i className="gg-close"></i>
+            </button>
           </div>
-        )}
-        {error && (
-          <div className="video-container">
-            <Text h4 weight="bold" color="error">
-              {"Sorry, we couldn't load the video"}
-            </Text>
-          </div>
-        )}
-      </section>
+          {videoId && !error && (
+            <YouTube
+              videoId={videoId}
+              id="cardVideo"
+              className="video"
+              opts={options}
+              onError={() => setError(true)}
+              onReady={handleLoadVideo}
+              containerClassName="video-container"
+            />
+          )}
+          {loading && !error && (
+            <div className="video-container-loader">
+              <Loading color="secondary" type="points" />
+            </div>
+          )}
+          {error && (
+            <div className="video-container">
+              <Text h4 weight="bold" color="error">
+                {"Sorry, we couldn't load the video"}
+              </Text>
+            </div>
+          )}
+        </section>
+      </Draggable>
 
       <style jsx>{`
         @import url("https://css.gg/close.css");
@@ -137,20 +101,22 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
           z-index: 1000;
           width: 100%;
           max-width: 320px;
-          aspect-ratio: 16/10;
+
           background: #333;
           border-radius: var(--yt-card-radius);
           box-shadow: 0.5rem 1rem 1.5rem rgba(51, 51, 51, 0.5);
         }
         .move-bar {
+          background: #333;
           width: 100%;
-          height: 10%;
+          position: relative;
+
+          height: var(--yt-card-handle-h);
           display: flex;
           justify-content: center;
           align-items: center;
-          position: relative;
           cursor: move;
-          max-height: 1.25rem;
+          border-radius: var(--yt-card-radius) var(--yt-card-radius) 0 0;
         }
         .close-card {
           --size: 2rem;
