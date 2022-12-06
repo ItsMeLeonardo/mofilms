@@ -9,7 +9,7 @@ export default function Tv() {
         <meta name="description" content="The most popular tv series" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ComingSoon />;
+      <ComingSoon />
     </>
   );
 }
