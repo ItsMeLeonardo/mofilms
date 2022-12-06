@@ -1,44 +1,27 @@
 import { GetServerSideProps } from "next";
-import { useState, useEffect } from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
+import { Grid } from "@nextui-org/react";
 
-import { Text, Grid } from "@nextui-org/react";
 //components
 import DetailPoster from "components/DetailPoster";
 import MovieCast from "components/MovieDetail/MovieCast";
 import MovieData from "components/MovieDetail/MovieData";
 import MovieOptions from "components/MovieDetail/MovieOptions";
-import MovieListLoader from "components/MovieList/loaders";
-const MovieList = dynamic(() => import("components/MovieList"));
+
 //utils
 import movieService from "services/movies";
 
-import { useNearScreen } from "hooks/useNearScreen";
 import ImageService from "services/images";
 //types
 import { MovieDetailResponse } from "services/movies/details/types";
-import { Result as SimilarResult } from "services/movies/similar/types";
+import MovieRecommendations from "components/MovieRecommendations";
 
 interface MovieDetailProps {
   movie: MovieDetailResponse;
 }
 
 export default function MovieDetails({ movie }: MovieDetailProps) {
-  const [recommendationMovies, setSimilarMovies] =
-    useState<SimilarResult[]>(null);
-
-  const { elementRef: recommendationsMoviesRef, isNearScreen } =
-    useNearScreen();
   const poster = ImageService.poster.original(movie.poster_path);
-
-  useEffect(() => {
-    if (isNearScreen) {
-      movieService.similar(movie.id.toString()).then((data) => {
-        setSimilarMovies(data.results);
-      });
-    }
-  }, [isNearScreen, movie.id]);
 
   if (!movie) {
     return <h1>Loading</h1>;
@@ -66,21 +49,7 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
         {/* Cast */}
         <MovieCast id={movie.id} />
       </Grid.Container>
-
-      <span ref={recommendationsMoviesRef}>
-        {/* this is a flag to call the recommendations movies */}
-      </span>
-
-      {recommendationMovies ? (
-        <>
-          <Text h3 weight="bold" size="2rem">
-            Recommendations {`(${recommendationMovies.length})`}
-          </Text>
-          <MovieList movies={recommendationMovies} />
-        </>
-      ) : (
-        <MovieListLoader />
-      )}
+      <MovieRecommendations movieId={movie.id.toString()} />
     </>
   );
 }
