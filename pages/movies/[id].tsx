@@ -42,7 +42,7 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
       />
 
       <Grid.Container css={{ position: "relative", bottom: "10rem" }}>
-        <MovieOptions poster={movie.poster_path} />
+        <MovieOptions poster={movie.poster_path} homepage={movie.homepage} />
         <MovieData movie={movie} />
         <MovieCast id={movie.id} />
       </Grid.Container>
