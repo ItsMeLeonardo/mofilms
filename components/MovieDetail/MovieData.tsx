@@ -1,9 +1,10 @@
 import { Grid, Col, Text, Row, Spacer } from "@nextui-org/react";
+import { Calendar, Ticket, TimeCircle, Voice, Wallet } from "react-iconly";
 //utils
 import { formatCurrency } from "utils/formatCurrency";
 import { formatDate } from "utils/formatDate";
 //types
-import { MovieDataProps } from "./types";
+import type { MovieDataProps } from "./types";
 
 export default function MovieData({ movie }: MovieDataProps) {
   return (
@@ -22,38 +23,47 @@ export default function MovieData({ movie }: MovieDataProps) {
           </Row>
           <Spacer />
           {/* details */}
-          <Col>
+          <section className="detailContainer">
             <Text h5 size="1.5rem">
               Details
             </Text>
-            <Text>
+            <div className="detailText">
+              <TimeCircle />
               <Text b>Duration: </Text>
               {movie.runtime} minutes
-            </Text>
-            <Text>
+            </div>
+            <div className="detailText">
+              <Voice />
               <Text b>Language: </Text>
               {movie.original_language}
-            </Text>
-            <Text>
+            </div>
+            <div className="detailText">
+              <Wallet />
               <Text b>budget: </Text>
               {formatCurrency(movie.budget)}
-            </Text>
-            <Text>
+            </div>
+            <div className="detailText">
+              <Ticket />
               <Text b>Revenue: </Text>
               {formatCurrency(movie.revenue)}
-            </Text>
-            <Text>
+            </div>
+            <div className="detailText">
+              <Calendar />
               <Text b>Release date: </Text>
-              {formatDate(movie.release_date, { dateStyle: "medium" })}
-            </Text>
-          </Col>
+              <Text>
+                {formatDate(movie.release_date, { dateStyle: "medium" })}
+              </Text>
+            </div>
+          </section>
           {/* overview */}
-          <Col css={{ mt: ".5rem", maxW: "90%" }}>
-            <Text h5 size="1.5rem">
-              Storyline
-            </Text>
-            <Text>{movie.overview}</Text>
-          </Col>
+          {movie.overview.length > 0 && (
+            <Col css={{ mt: ".5rem", maxW: "90%" }}>
+              <Text h5 size="1.5rem">
+                Storyline
+              </Text>
+              <Text>{movie.overview}</Text>
+            </Col>
+          )}
         </Col>
       </Grid>
       <style jsx>{`
@@ -66,6 +76,18 @@ export default function MovieData({ movie }: MovieDataProps) {
           border: solid 1px #fff;
           text-transform: uppercase;
           white-space: nowrap;
+        }
+        .detailContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .detailText {
+          margin: 0;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          width: 100%;
         }
       `}</style>
     </>

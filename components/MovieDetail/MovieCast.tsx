@@ -77,6 +77,7 @@ export default function MovieCast({ id }: MovieCardProps) {
           height: 100%;
           max-height: 500px;
           overflow: auto;
+          padding: 0.5rem;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
