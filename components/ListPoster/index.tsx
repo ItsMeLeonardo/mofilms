@@ -7,7 +7,8 @@ import PosterData from "./PosterData";
 import PosterSlot from "./PosterSlot";
 import ListPosterLoader from "./loaders";
 // utils
-import { useResponsiveImage } from "hooks/useResponsiveImage";
+import ImageService from "services/images";
+
 //types
 import {
   MoviePopularResponse,
@@ -37,11 +38,12 @@ export default function ListPoster({
   const { data } = useSWR<MoviePopularResponse>(SWR_MOVIE_POPULAR_KEY);
 
   const movies = data?.results;
-  const [movieToShow, setMovieToShow] = useState<PopularResult>(movies[0] || null);
-  const { imageUrl: poster } = useResponsiveImage(
-    movieToShow?.backdrop_path,
-    "backdrop"
+  const [movieToShow, setMovieToShow] = useState<PopularResult>(
+    movies[0] || null
   );
+
+  const poster = ImageService.poster.original(movieToShow.backdrop_path);
+
   const isLoading = !movies && !movieToShow;
   if (isLoading) {
     return <ListPosterLoader />;

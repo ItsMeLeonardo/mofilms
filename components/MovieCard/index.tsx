@@ -6,7 +6,7 @@ import { Star } from "react-iconly";
 // components
 import BtnToSeeTrailer from "./BtnToSeeTrailer";
 // utils
-import { useResponsiveImage } from "hooks/useResponsiveImage";
+import ImageService from "services/images";
 //types
 import { MovieCardProps, defaultProps } from "./types";
 
@@ -52,8 +52,8 @@ function MovieCard({
   className = "",
 }: MovieCardProps = defaultProps) {
   const router = useRouter();
-  const { imageUrl: posterUrl } = useResponsiveImage(poster, "poster");
-  const { imageUrl: backdropUrl } = useResponsiveImage(backdrop, "backdrop");
+  const posterUrl = ImageService.poster.w342(poster);
+  const backdropUrl = ImageService.backdrop.w780(backdrop);
 
   const handleClick = () => {
     router.push(`/movies/${id}`);

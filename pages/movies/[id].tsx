@@ -15,7 +15,7 @@ const MovieList = dynamic(() => import("components/MovieList"));
 import movieService from "services/movies";
 
 import { useNearScreen } from "hooks/useNearScreen";
-import { useResponsiveImage } from "hooks/useResponsiveImage";
+import ImageService from "services/images";
 //types
 import { MovieDetailResponse } from "services/movies/details/types";
 import { Result as SimilarResult } from "services/movies/similar/types";
@@ -30,10 +30,7 @@ export default function MovieDetails({ movie }: MovieDetailProps) {
 
   const { elementRef: recommendationsMoviesRef, isNearScreen } =
     useNearScreen();
-  const { imageUrl: poster } = useResponsiveImage(
-    movie.backdrop_path,
-    "backdrop"
-  );
+  const poster = ImageService.poster.original(movie.poster_path);
 
   useEffect(() => {
     if (isNearScreen) {

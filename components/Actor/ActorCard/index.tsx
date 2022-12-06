@@ -2,7 +2,7 @@ import { Tooltip, Text, Grid, Card, CSS } from "@nextui-org/react";
 //components
 import ActorInfoCard from "components/Actor/ActorCard/ActorInfoCard";
 //utils
-import { useResponsiveImage } from "hooks/useResponsiveImage";
+import ImageService from "services/images";
 //types
 import { KnownFor } from "services/actors/types/knowFor";
 import { ActorCardProps } from "components/Actor/types";
@@ -36,7 +36,7 @@ const cardTooltipCss: CSS = { bgBlur: ".5rem", bg: "rgba(51,51,51,.65)" };
 export default function ActorCard({ actor, advancedData }: ActorCardProps) {
   const { profile_path, known_for, name } = actor;
 
-  const { imageUrl: photo } = useResponsiveImage(profile_path, "profile");
+  const photo = ImageService.profile.w185(profile_path);
 
   if (!profile_path) return <></>;
 
