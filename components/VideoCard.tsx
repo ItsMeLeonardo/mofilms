@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import YouTube, { Options } from "react-youtube";
 import { Loading, Text } from "@nextui-org/react";
 
@@ -45,7 +45,8 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
     setLoading(false);
   };
 
-  const closeCard = () => {
+  const closeCard = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setShowCard(false);
     onClose();
   };
@@ -60,10 +61,10 @@ export default function VideoCard({ movieId, onClose = () => {} }: Props) {
         <section onClick={(event) => event.stopPropagation()}>
           <div className="move-bar handle" id="handlerDragVideoCard">
             <i className="gg-arrow-align-h"></i>
-            <button className="close-card" onClick={closeCard}>
-              <i className="gg-close"></i>
-            </button>
           </div>
+          <button className="close-card" onClick={closeCard}>
+            <i className="gg-close"></i>
+          </button>
           {videoId && !error && (
             <YouTube
               videoId={videoId}
