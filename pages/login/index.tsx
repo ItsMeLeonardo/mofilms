@@ -1,4 +1,5 @@
 import { FormEvent, MouseEvent } from "react";
+import { useRouter } from "next/router";
 import {
   Input,
   Link,
@@ -8,11 +9,13 @@ import {
   Checkbox,
   CSS,
 } from "@nextui-org/react";
-import { Password, Message, User } from "react-iconly";
+import { Password, User } from "react-iconly";
+
+//utils
+import userService from "services/user";
 
 //components
 import Logo from "components/Logo";
-import { FormEventHandler } from "react";
 
 //nextUI css
 const containerCss: CSS = {
@@ -27,8 +30,21 @@ const logoTextCss: CSS = {
 };
 
 export default function Login() {
+  const router = useRouter();
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const username = form.username.value.trim();
+    const password = form.password.value.trim();
+
+    if (password === "" && username === "") {
+      return;
+    }
+
+    userService.Auth.Login({ username, password }).then((response) => {
+      console.log({ response });
+      router.push("/");
+    });
   };
 
   const usingPublicAccount = (event: MouseEvent<HTMLButtonElement>) => {};
@@ -47,7 +63,9 @@ export default function Login() {
               clearable
               bordered
               fullWidth
+              required
               color="primary"
+              name="username"
               size="lg"
               placeholder="User name"
               contentLeft={<User />}
@@ -58,8 +76,10 @@ export default function Login() {
               clearable
               bordered
               fullWidth
+              required
               color="primary"
               size="lg"
+              name="password"
               placeholder="Password"
               type="password"
               contentLeft={<Password />}
